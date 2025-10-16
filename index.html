@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FICDES INVESTMENT GROUP</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .hero {
+      position: relative;
+      overflow: hidden;
+      background-color: #007bff;   
+      color: white;
+      text-align: center;
+      padding: 80px 20px;
+    }
+    .hero h1, .hero h2, .hero p, .hero .btn {
+      position: relative;
+      z-index: 2;
+    }
+    .hero .scrolling-image {
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background-image: url('assets/fond1.png');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: left center;
+      animation: scrollImage 20s linear infinite;
+      z-index: 1;
+    }
+    @keyframes scrollImage {
+      0% { left: -100%; }
+      100% { left: 100%; }
+    }
+
+    /* Sections */
+    #about { padding: 50px 20px; background: #f9f9f9; border-radius: 12px; max-width: 900px; margin: 50px auto; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+    #about h2 { text-align: center; font-size: 28px; margin-bottom: 20px; color: #007bff; }
+    .highlight { font-weight: bold; font-size: 22px; color: green; text-align: center; margin-bottom: 15px; }
+    .about-text { font-size: 18px; line-height: 1.7; color: #333; text-align: justify; }
+    .about-text strong { color: #007bff; }
+
+    /* Form */
+    form select, form input, form textarea, form button { width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 6px; border: 1px solid #ccc; font-size: 16px; }
+    form button { background-color: #007bff; color: white; border: none; cursor: pointer; }
+
+    /* Nav - fixed + hide on scroll to avoid obstruction on mobile */
+    nav {
+      display:flex;
+      align-items:center;
+      padding:12px 20px;
+      gap:12px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: #ffffff;
+      z-index: 9999;
+      transition: transform 0.28s ease, opacity 0.28s ease;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+      -webkit-backdrop-filter: blur(6px);
+      backdrop-filter: blur(6px);
+    }
+    nav.hide { transform: translateY(-100%); opacity: 0; pointer-events: none; }
+    nav .logo { height:44px; margin-right:12px; }
+    nav ul { list-style:none; display:flex; gap:12px; align-items:center; margin:0; padding:0; }
+    nav ul li { display:inline-block; }
+    nav ul li a { text-decoration:none; color:inherit; padding:6px 8px; display:inline-block; }
+    .btn { display:inline-block; padding:12px 18px; background:#0069d9; color:#fff; border-radius:6px; text-decoration:none; }
+
+    /* Basic responsive */
+    @media (max-width:720px){
+      nav ul { flex-wrap:wrap; }
+      .hero { padding:40px 12px; }
+    }
+
+    /* ensure page content doesn't go under the fixed nav */
+    body { margin: 0; padding-top: 72px; } /* adjust if nav height changes */
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav id="main-nav" aria-label="Main navigation">
+    <img src="assets/logo.png" alt="Logo FICDES BANK" class="logo">
+    <ul>
+      <li><a href="#about" class="nav-about">À propos</a></li>
+      <li><a href="#stats" class="nav-stats">Chiffres clés</a></li>
+      <li><a href="#services" class="nav-services">Nos services</a></li>
+      <li><a href="#news" class="nav-news">Communiqués</a></li>
+      <li><a href="#contact" class="nav-contact">Contact</a></li>
+      <li>
+        <select id="lang-select" onchange="setLang(this.value)" aria-label="Sélection de la langue">
+          <option value="FR">Français</option>
+          <option value="EN">English</option>
+          <option value="ES">Español</option>
+          <option value="TR">Türkçe</option>
+          <option value="DE">Deutsch</option>
+          <option value="AR">العربية</option>
+          <option value="ZH">中文</option>
+          <option value="RU">Русский</option>
+        </select>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="scrolling-image" aria-hidden="true"></div>
+    <h1>FICDES INVESTMENT GROUP</h1>
+    <h2>FICDES BANK S.A</h2>
+    <p class="hero-subtitle">fond d'investissement et de crédit pour le développement économique et social</p>
+    <p class="hero-text">Innovation • Transparence • Confiance</p>
+    <a href="pages/index_CPF1.html" class="btn">Nouvel utilisateur ? Inscrivez-vous maintenant.</a>
+  </div>
+
+  <!-- About -->
+  <section id="about">
+    <h2 class="about-title">À propos</h2>
+    <p class="highlight">QUI SOMMES-NOUS ?</p>
+    <p class="about-text">
+      <strong>FICDES INVESTMENT GROUP / FICDES BANK S.A</strong> est une institution financière panafricaine moderne qui se distingue par son engagement à offrir des solutions bancaires innovantes, fiables et sécurisées, adaptées aussi bien aux particuliers qu’aux entreprises.
+    </p>
+    <p class="about-text">
+      Fondée en 2020 à <strong>Istanbul (Turquie)</strong>, notre banque a connu une expansion rapide et stratégique, avec l’établissement de son siège international à <strong>Clarksburg, aux États-Unis</strong>, symbole de sa vision mondiale et de son envergure internationale.
+    </p>
+    <p class="about-text">
+      Dans sa volonté de renforcer sa présence en Afrique de l’Ouest et d’accompagner la dynamique économique régionale, <strong>FICDES BANK S.A</strong> a ouvert un bureau de coordination dans la zone CEDEAO, notamment au <strong>Togo</strong> et au <strong>Bénin</strong>.
+    </p>
+    <p class="about-text">
+      <strong>FICDES BANK S.A</strong> incarne aujourd’hui la confiance, la performance et l’innovation, au service du développement durable et de l’inclusion financière sur le continent africain et au-delà.
+    </p>
+  </section>
+
+  <!-- Stats -->
+  <section id="stats">
+    <h2 class="stats-title">Chiffres clés</h2>
+    <div class="slider">
+      <div class="stat-card">
+        <i class="fa-solid fa-chart-line"></i>
+        <h3 class="stat-value">+05%</h3>
+        <p class="stat-desc">Croissance annuelle</p>
+      </div>
+      <div class="stat-card">
+        <i class="fa-solid fa-users"></i>
+        <h3 class="stat-value">+15 000</h3>
+        <p class="stat-desc">Clients satisfaits</p>
+      </div>
+      <div class="stat-card">
+        <i class="fa-solid fa-handshake"></i>
+        <h3 class="stat-value">+120</h3>
+        <p class="stat-desc">Partenaires stratégiques</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section id="services">
+    <h2 class="services-title">Nos services</h2>
+    <div class="service-container">
+      <div class="service-card"><h3>Comptes Bancaires</h3><p>Solutions sécurisées pour particuliers et entreprises.</p></div>
+      <div class="service-card"><h3>Prêts et Crédit</h3><p>Des financements adaptés à vos projets.</p></div>
+      <div class="service-card"><h3>Investissements</h3><p>Opportunités diversifiées pour votre capital.</p></div>
+      <div class="service-card"><h3>Banque Digitale</h3><p>Accédez à vos services en ligne et mobile.</p></div>
+    </div>
+  </section>
+
+  <!-- News -->
+  <section id="news">
+    <h2>Communiqués</h2>
+    <div class="carousel">
+      <div class="communiques">
+        <div class="communique-card">
+          <h3><i class="fa-solid fa-bullhorn"></i> Lancement de la Banque Digitale</h3>
+          <p>FICDES INVESTMENT GROUP annonce le lancement de sa plateforme bancaire digitale.</p>
+          <span class="date">Publié le 15 septembre 2025</span>
+        </div>
+        <div class="communique-card">
+          <h3><i class="fa-solid fa-building-columns"></i> Nouvelle Agence à Lomé</h3>
+          <p>Une nouvelle agence FICDES BANK a ouvert ses portes à Lomé.</p>
+          <span class="date">Publié le 10 août 2025</span>
+        </div>
+        <div class="communique-card">
+          <h3><i class="fa-solid fa-handshake"></i> Partenariat Stratégique</h3>
+          <p>Signature d’un partenariat pour soutenir les PME africaines.</p>
+          <span class="date">Publié le 25 juillet 2025</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact">
+    <h2 class="contact-title">Contactez-nous</h2>
+    <form action="https://formspree.io/f/mnngpokp" method="POST">
+      <select name="to" required>
+        <option value="">À :</option>
+        <option value="gestion.credit@ficdesbank.net">gestion.credit@ficdesbank.net</option>
+        <option value="diplomacie.consulat@ficdesbank.net">diplomacie.consulat@ficdesbank.net</option>
+        <option value="secretariat.agence-togo@ficdesbank.net">secretariat.agence-togo@ficdesbank.net</option>
+      </select>
+      <input type="text" name="name" placeholder="Votre nom" required>
+      <input type="email" name="email" placeholder="Votre email" required>
+      <textarea name="message" rows="6" placeholder="Votre message" required></textarea>
+      <button type="submit">Envoyer</button>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    &copy; 2025 FICDES INVESTMENT GROUP – Tous droits réservés
+  </footer>
+
+<script>
+/* Traductions complètes (inchangées de ton original) */
+const translations = {
+  FR: {
+    nav: ["À propos", "Chiffres clés", "Nos services", "Communiqués", "Contact"],
+    heroText: "Innovation • Transparence • Confiance",
+    heroSubtitle: "fond d'investissement et de crédit pour le développement économique et social",
+    heroBtn: "Nouvel utilisateur ? Inscrivez-vous maintenant.",
+    heroLink: "pages/index_CPF1.html",
+    aboutTitle: "À propos",
+    aboutText: [
+      "FICDES INVESTMENT GROUP / FICDES BANK S.A est une institution financière panafricaine moderne qui se distingue par son engagement à offrir des solutions bancaires innovantes, fiables et sécurisées, adaptées aussi bien aux particuliers qu’aux entreprises.",
+      "Fondée en 2020 à Istanbul (Turquie), notre banque a connu une expansion rapide et stratégique, avec l’établissement de son siège international à Clarksburg, aux États-Unis, symbole de sa vision mondiale et de son envergure internationale.",
+      "Dans sa volonté de renforcer sa présence en Afrique de l’Ouest et d’accompagner la dynamique économique régionale, FICDES BANK S.A a ouvert un bureau de coordination dans la zone CEDEAO, notamment au Togo et au Bénin.",
+      "FICDES BANK S.A incarne aujourd’hui la confiance, la performance et l’innovation, au service du développement durable et de l’inclusion financière sur le continent africain et au-delà."
+    ],
+    statsTitle: "Chiffres clés",
+    statsValues: ["+05%", "+15 000", "+120"],
+    statsDesc: ["Croissance annuelle", "Clients satisfaits", "Partenaires stratégiques"],
+    highlight: "QUI SOMMES-NOUS ?",
+    servicesTitle: "Nos services",
+    contactTitle: "Contactez-nous",
+    namePlaceholder: "Votre nom",
+    emailPlaceholder: "Votre email",
+    messagePlaceholder: "Votre message",
+    sendBtn: "Envoyer",
+    toLabel: "À :"
+  },
+  EN: {
+    nav: ["About", "Key Figures", "Our Services", "News", "Contact"],
+    heroText: "Innovation • Transparency • Trust",
+    heroSubtitle: "investment and credit fund for economic and social development",
+    heroBtn: "New user? Sign up now.",
+    heroLink: "pages/index_CPF1.html",
+    aboutTitle: "About",
+    aboutText: [
+      "FICDES INVESTMENT GROUP is a modern Pan-African financial institution, offering innovative and secure banking solutions for individuals and businesses.",
+      "Founded in 2020 in Istanbul (Turkey), our bank experienced rapid strategic expansion, establishing its international headquarters in Clarksburg, USA, reflecting its global vision and reach.",
+      "To strengthen its presence in West Africa and support regional economic development, FICDES BANK S.A opened a coordination office in the ECOWAS region, notably in Togo and Benin.",
+      "FICDES BANK S.A embodies trust, performance, and innovation, serving sustainable development and financial inclusion across Africa and beyond."
+    ],
+    statsTitle: "Key Figures",
+    statsValues: ["+05%", "+15 000", "+120"],
+    statsDesc: ["Annual Growth", "Satisfied Clients", "Strategic Partners"],
+    highlight: "WHO ARE WE?",
+    servicesTitle: "Our Services",
+    contactTitle: "Contact Us",
+    namePlaceholder: "Your Name",
+    emailPlaceholder: "Your Email",
+    messagePlaceholder: "Your Message",
+    sendBtn: "Send",
+    toLabel: "To:"
+  },
+  ES: {
+    nav: ["Acerca de", "Cifras Clave", "Nuestros Servicios", "Comunicados", "Contacto"],
+    heroText: "Innovación • Transparencia • Confianza",
+    heroSubtitle: "fondo de inversión y crédito para el desarrollo económico y social",
+    heroBtn: "¿Nuevo usuario? Regístrese ahora.",
+    heroLink: "pages/index_CPF1.html",
+    aboutTitle: "Acerca de",
+    aboutText: [
+      "FICDES INVESTMENT GROUP / FICDES BANK S.A es una institución financiera panafricana moderna que se distingue por ofrecer soluciones bancarias innovadoras, fiables y seguras, adecuadas tanto para particulares como para empresas.",
+      "Fundada en 2020 en Estambul (Turquía), nuestro banco experimentó una rápida expansión estratégica, estableciendo su sede internacional en Clarksburg, EE. UU., reflejando su visión y alcance global.",
+      "Para fortalecer su presencia en África Occidental y apoyar el desarrollo económico regional, FICDES BANK S.A abrió una oficina de coordinación en la región CEDEAO, especialmente en Togo y Benín.",
+      "FICDES BANK S.A encarna confianza, rendimiento e innovación, sirviendo al desarrollo sostenible y la inclusión financiera en África y más allá."
+    ],
+    statsTitle: "Cifras Clave",
+    statsValues: ["+05%", "+15 000", "+120"],
+    statsDesc: ["Crecimiento anual", "Clientes satisfechos", "Socios estratégicos"],
+    highlight: "¿QUIÉNES SOMOS?",
+    servicesTitle: "Nuestros Servicios",
+    contactTitle: "Contáctenos",
+    namePlaceholder: "Su nombre",
+    emailPlaceholder: "Su correo electrónico",
+    messagePlaceholder: "Su mensaje",
+    sendBtn: "Enviar",
+    toLabel: "A:"
+  },
+  TR: {
+    nav: ["Hakkında", "Ana Rakamlar", "Hizmetlerimiz", "Haberler", "İletişim"],
+    heroText: "İnovasyon • Şeffaflık • Güven",
+    heroSubtitle: "ekonomik ve sosyal kalkınma için yatırım ve kredi fonu",
+    heroBtn: "Yeni kullanıcı mısınız? Şimdi kaydolun.",
+    heroLink: "pages/index_CPF1.html",
+    aboutTitle: "Hakkında",
+    aboutText: [
+      "FICDES INVESTMENT GROUP / FICDES BANK S.A, bireyler ve işletmeler için yenilikçi, güvenli bankacılık çözümleri sunan modern bir Pan-Afrika finans kuruluşudur.",
+      "2020 yılında İstanbul (Türkiye)'de kurulan bankamız, uluslararası merkezi ABD Clarksburg'da olacak şekilde hızlı stratejik bir genişleme yaşamıştır.",
+      "Batı Afrika'daki varlığını güçlendirmek ve bölgesel ekonomik kalkınmayı desteklemek için FICDES BANK S.A, özellikle Togo ve Benin'de bir koordinasyon ofisi açmıştır.",
+      "FICDES BANK S.A, güven, performans ve inovasyonu temsil ederek sürdürülebilir kalkınma ve finansal kapsayıcılığa hizmet etmektedir."
+    ],
+    statsTitle: "Ana Rakamlar",
+    statsValues: ["+05%", "+15 000", "+120"],
+    statsDesc: ["Yıllık Büyüme", "Memnun Müşteriler", "Stratejik Ortaklar"],
+    highlight: "BİZ KİMİZ?",
+    servicesTitle: "Hizmetlerimiz",
+    contactTitle: "İletişim",
+    namePlaceholder: "Adınız",
+    emailPlaceholder: "E-posta Adresiniz",
+    messagePlaceholder: "Mesajınız",
+    sendBtn: "Gönder",
+    toLabel: "Kime:"
+  },
+  DE: {
+    nav: ["Über uns", "Kennzahlen", "Unsere Dienstleistungen", "Neuigkeiten", "Kontakt"],
+    heroText: "Innovation • Transparenz • Vertrauen",
+    heroSubtitle: "Investitions- und Kreditfonds für wirtschaftliche und soziale Entwicklung",
+    heroBtn: "Neuer Benutzer? Jetzt registrieren.",
+    heroLink: "pages/index_CPF1.html",
+    aboutTitle: "Über uns",
+    aboutText: [
+      "FICDES INVESTMENT GROUP / FICDES BANK S.A ist eine moderne panafrikanische Finanzinstitution, die innovative, sichere Banklösungen für Privatpersonen und Unternehmen bietet.",
+      "Gegründet 2020 in Istanbul (Türkei), erlebte unsere Bank eine schnelle strategische Expansion und etablierte ihren internationalen Hauptsitz in Clarksburg, USA.",
+      "Um ihre Präsenz in Westafrika zu stärken und die regionale wirtschaftliche Entwicklung zu unterstützen, eröffnete FICDES BANK S.A ein Koordinationsbüro in der ECOWAS-Region, insbesondere in Togo und Benin.",
+      "FICDES BANK S.A verkörpert Vertrauen, Leistung und Innovation und dient der nachhaltigen Entwicklung und finanziellen Inklusion in Afrika und darüber hinaus."
+    ],
+    statsTitle: "Kennzahlen",
+    statsValues: ["+05%", "+15 000", "+120"],
+    statsDesc: ["Jährliches Wachstum", "Zufriedene Kunden", "Strategische Partner"],
+    highlight: "WER SIND WIR?",
+    servicesTitle: "Unsere Dienstleistungen",
+    contactTitle: "Kontaktieren Sie uns",
+    namePlaceholder: "Ihr Name",
+    emailPlaceholder: "Ihre E-Mail",
+    messagePlaceholder: "Ihre Nachricht",
+    sendBtn: "Senden",
+    toLabel: "An:"
+  },
+  AR: {
+    nav: ["من نحن", "أرقام رئيسية", "خدماتنا", "الأخبار", "اتصل بنا"],
+    heroText: "الابتكار • الشفافية • الثقة",
+    heroSubtitle: "صندوق استثمار وائتمان من أجل التنمية الاقتصادية والاجتماعية",
+    heroBtn: "مستخدم جديد؟ سجل الآن.",
+    heroLink: "pages/index_CPF1.html",
+    aboutTitle: "من نحن",
+    aboutText: [
+      "FICDES INVESTMENT GROUP / FICDES BANK S.A هي مؤسسة مالية عصرية عابرة للقارات تقدم حلولاً مصرفية مبتكرة وآمنة للأفراد والشركات.",
+      "تأسست في عام 2020 في إسطنبول (تركيا)، وشهدت البنك توسعًا استراتيجيًا سريعًا مع إنشاء مقرها الدولي في كلاركسبرغ، الولايات المتحدة.",
+      "لتعزيز وجودها في غرب إفريقيا ودعم التنمية الاقتصادية الإقليمية، افتتحت FICDES BANK S.A مكتب تنسيق في منطقة ECOWAS، وخاصة في توغو وبنين.",
+      "تمثل FICDES BANK S.A اليوم الثقة والأداء والابتكار، لخدمة التنمية المستدامة والشمول المالي في أفريقيا وما بعدها."
+    ],
+    statsTitle: "أرقام رئيسية",
+    statsValues: ["+05%", "+15 000", "+120"],
+    statsDesc: ["النمو السنوي", "العملاء الراضون", "الشركاء الاستراتيجيون"],
+    highlight: "من نحن؟",
+    servicesTitle: "خدماتنا",
+    contactTitle: "اتصل بنا",
+    namePlaceholder: "اسمك",
+    emailPlaceholder: "بريدك الإلكتروني",
+    messagePlaceholder: "رسالتك",
+    sendBtn: "إرسال",
+    toLabel: "إلى:"
+  },
+  ZH: {
+    nav: ["关于我们", "关键数据", "我们的服务", "新闻", "联系我们"],
+    heroText: "创新 • 透明 • 信任",
+    heroSubtitle: "用于经济和社会发展的投资和信贷基金",
+    heroBtn: "新用户？立即注册。",
+    heroLink: "pages/index_CPF1.html",
+    aboutTitle: "关于我们",
+    aboutText: [
+      "FICDES INVESTMENT GROUP / FICDES BANK S.A 是一家现代泛非金融机构，为个人和企业提供创新、安全的银行解决方案。",
+      "2020年成立于土耳其伊斯坦布尔，银行迅速战略性扩张，并在美国克拉克斯堡设立国际总部。",
+      "为加强其在西非的影响力并支持区域经济发展，FICDES BANK S.A 在西共体地区，尤其是多哥和贝宁设立了协调办公室。",
+      "FICDES BANK S.A 体现了信任、绩效和创新，为非洲及其他地区的可持续发展和金融包容性服务。"
+    ],
+    statsTitle: "关键数据",
+    statsValues: ["+05%", "+15 000", "+120"],
+    statsDesc: ["年度增长", "满意客户", "战略合作伙伴"],
+    highlight: "我们是谁？",
+    servicesTitle: "我们的服务",
+    contactTitle: "联系我们",
+    namePlaceholder: "您的姓名",
+    emailPlaceholder: "您的邮箱",
+    messagePlaceholder: "您的信息",
+    sendBtn: "发送",
+    toLabel: "收件人:"
+  },
+  RU: {
+    nav: ["О нас", "Ключевые показатели", "Наши услуги", "Новости", "Контакты"],
+    heroText: "Инновации • Прозрачность • Доверие",
+    heroSubtitle: "инвестиционный и кредитный фонд для экономического и социального развития",
+    heroBtn: "Новый пользователь? Зарегистрируйтесь сейчас.",
+    heroLink: "pages/index_CPF1.html",
+    aboutTitle: "О нас",
+    aboutText: [
+      "FICDES INVESTMENT GROUP / FICDES BANK S.A — это современное пан-африканское финансовое учреждение, предлагающее инновационные и безопасные банковские решения для частных лиц и компаний.",
+      "Основанный в 2020 году в Стамбуле (Турция), наш банк быстро стратегически расширился, открыв международную штаб-квартиру в Кларксбурге, США.",
+      "Для укрепления присутствия в Западной Африке и поддержки регионального экономического развития FICDES BANK S.A открыл координационный офис в регионе ECOWAS, в частности в Того и Бенине.",
+      "FICDES BANK S.A воплощает доверие, эффективность и инновации, обслуживая устойчивое развитие и финансовую инклюзию в Африке и за её пределами."
+    ],
+    statsTitle: "Ключевые показатели",
+    statsValues: ["+05%", "+15 000", "+120"],
+    statsDesc: ["Годовой рост", "Довольные клиенты", "Стратегические партнеры"],
+    highlight: "КТО МЫ?",
+    servicesTitle: "Наши услуги",
+    contactTitle: "Связаться с нами",
+    namePlaceholder: "Ваше имя",
+    emailPlaceholder: "Ваш Email",
+    messagePlaceholder: "Ваше сообщение",
+    sendBtn: "Отправить",
+    toLabel: "Кому:"
+  }
+};
+
+function setLang(lang) {
+  const t = translations[lang];
+  if (!t) return;
+  try { localStorage.setItem("selectedLang", lang); } catch(e){ /* ignore */ }
+  document.documentElement.dir = (lang === 'AR') ? 'rtl' : 'ltr';
+
+  const navSelectors = ['.nav-about', '.nav-stats', '.nav-services', '.nav-news', '.nav-contact'];
+  navSelectors.forEach((sel, i) => {
+    const el = document.querySelector(sel);
+    if (el && t.nav[i]) el.textContent = t.nav[i];
+  });
+
+  const heroTextEl = document.querySelector(".hero-text");
+  if (heroTextEl && t.heroText) heroTextEl.textContent = t.heroText;
+  const heroSubtitleEl = document.querySelector(".hero-subtitle");
+  if (heroSubtitleEl && t.heroSubtitle) heroSubtitleEl.textContent = t.heroSubtitle;
+  const heroBtn = document.querySelector(".btn");
+  if (heroBtn && t.heroBtn) {
+    heroBtn.textContent = t.heroBtn;
+    heroBtn.setAttribute("href", t.heroLink || "pages/index_CPF1.html");
+  }
+
+  const aboutTitleEl = document.querySelector(".about-title");
+  if (aboutTitleEl && t.aboutTitle) aboutTitleEl.textContent = t.aboutTitle;
+  const highlightEl = document.querySelector(".highlight");
+  if (highlightEl && t.highlight) highlightEl.textContent = t.highlight;
+  const aboutParagraphs = document.querySelectorAll("#about .about-text");
+  aboutParagraphs.forEach((p, i) => { p.textContent = t.aboutText[i] || p.textContent; });
+
+  const statsTitleEl = document.querySelector(".stats-title");
+  if (statsTitleEl && t.statsTitle) statsTitleEl.textContent = t.statsTitle;
+  const statValues = document.querySelectorAll(".stat-value");
+  statValues.forEach((el, i) => { if (t.statsValues[i]) el.textContent = t.statsValues[i]; });
+  const statDescs = document.querySelectorAll(".stat-desc");
+  statDescs.forEach((el, i) => { if (t.statsDesc[i]) el.textContent = t.statsDesc[i]; });
+
+  const servicesTitleEl = document.querySelector(".services-title");
+  if (servicesTitleEl && t.servicesTitle) servicesTitleEl.textContent = t.servicesTitle;
+
+  const contactTitleEl = document.querySelector(".contact-title");
+  if (contactTitleEl && t.contactTitle) contactTitleEl.textContent = t.contactTitle;
+  const nameInput = document.querySelector("#contact form input[name='name']");
+  if (nameInput && t.namePlaceholder) nameInput.placeholder = t.namePlaceholder;
+  const emailInput = document.querySelector("#contact form input[name='email']");
+  if (emailInput && t.emailPlaceholder) emailInput.placeholder = t.emailPlaceholder;
+  const messageTextarea = document.querySelector("#contact form textarea[name='message']");
+  if (messageTextarea && t.messagePlaceholder) messageTextarea.placeholder = t.messagePlaceholder;
+  const sendBtn = document.querySelector("#contact form button");
+  if (sendBtn && t.sendBtn) sendBtn.textContent = t.sendBtn;
+  const toFirstOption = document.querySelector("#contact form select[name='to'] option:first-child");
+  if (toFirstOption && t.toLabel) toFirstOption.textContent = t.toLabel;
+
+  const langSelect = document.getElementById("lang-select");
+  if (langSelect) langSelect.value = lang;
+}
+
+/* --- Initialisation robuste pour mobile --- */
+document.addEventListener("DOMContentLoaded", () => {
+  const langSelect = document.getElementById("lang-select");
+  if (langSelect) {
+    // addEventListener ensures change fires reliably on mobile too
+    langSelect.addEventListener("change", (e) => {
+      setLang(e.target.value);
+    });
+  }
+  let savedLang = "FR";
+  try {
+    savedLang = localStorage.getItem("selectedLang") || "FR";
+  } catch(e) {
+    console.warn("LocalStorage non disponible");
+  }
+  setLang(savedLang);
+});
+
+// pageshow handles back/forward cache on mobile browsers
+window.addEventListener("pageshow", () => {
+  let savedLang = "FR";
+  try {
+    savedLang = localStorage.getItem("selectedLang") || "FR";
+  } catch(e) {}
+  setLang(savedLang);
+});
+
+/* --- Hide-on-scroll pour nav (évite d'obstruer le contenu mobile) --- */
+(function() {
+  let lastScrollTop = 0;
+  const nav = document.getElementById("main-nav");
+  if (!nav) return;
+  // small debounce to reduce work while scrolling
+  let ticking = false;
+  window.addEventListener("scroll", function() {
+    if (!ticking) {
+      window.requestAnimationFrame(function() {
+        const currentScroll = window.scrollY || document.documentElement.scrollTop;
+        // when scrolling down and past 60px, hide nav
+        if (currentScroll > lastScrollTop && currentScroll > 60) {
+          nav.classList.add("hide");
+        } else {
+          nav.classList.remove("hide");
+        }
+        lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+})();
+</script>
+
+</body>
+</html>

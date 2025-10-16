@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Confirmation d’Authentification - FICDES-BANK</title>
+  <style>
+    :root {
+      --primary-color: #0a3d62;
+      --secondary-color: #f1c40f;
+      --hover-color: #082f4f;
+      --input-bg: #f8f9fa;
+      --border-color: #ced4da;
+      --error-color: #d9534f;
+      --success-color: #28a745;
+      --gradient-bg: linear-gradient(to right, #0a3d62, #3c6382);
+    }
+
+    * {
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      background: var(--gradient-bg);
+      color: #333;
+      padding-bottom: 60px;
+    }
+
+    header {
+      width: 100%;
+      background: linear-gradient(90deg, rgba(10,61,98,1) 0%, rgba(10,61,98,0.85) 40%, rgba(60,99,130,1) 100%);
+      color: white;
+      text-align: center;
+      padding: 22px 0;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+      position: relative;
+    }
+
+    header h1 {
+      font-size: 26px;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    .highlight { color: var(--secondary-color); }
+
+    .lang-select {
+      position: absolute;
+      right: 20px;
+      top: 16px;
+      background: white;
+      color: var(--primary-color);
+      border: none;
+      border-radius: 6px;
+      padding: 6px 10px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .container {
+      background: #fff;
+      margin-top: 34px;
+      padding: 36px 28px;
+      border-radius: 14px;
+      box-shadow: 0 10px 35px rgba(0, 0, 0, 0.18);
+      width: min(1100px, calc(100% - 48px));
+      text-align: center;
+      border-top: 6px solid var(--secondary-color);
+      animation: fadeIn 0.8s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .logo {
+      font-size: 34px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: var(--secondary-color);
+      letter-spacing: 1px;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.15);
+    }
+
+    h2 { color: var(--primary-color); margin: 8px 0; font-size: 24px; }
+    h3 { color: var(--secondary-color); margin-bottom: 18px; font-size: 16px; }
+    p { font-size: 15px; color: #555; margin-bottom: 18px; line-height: 1.6; }
+
+    form { margin-top: 6px; }
+
+    .code-group {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin: 6px auto 18px auto;
+      padding: 18px 24px;
+      background: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 6px 20px rgba(10,61,98,0.06);
+      width: min(820px, calc(100% - 160px));
+      align-items: center;
+    }
+
+    .code-group input {
+      width: 56px;
+      height: 64px;
+      text-align: center;
+      font-size: 24px;
+      font-weight: 700;
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      background-color: var(--input-bg);
+      transition: 0.22s;
+      color: var(--primary-color);
+    }
+
+    .code-group input:focus {
+      border-color: var(--secondary-color);
+      box-shadow: 0 0 10px rgba(241,196,15,0.18);
+      outline: none;
+    }
+
+    button {
+      width: 320px;
+      background-color: var(--primary-color);
+      color: #fff;
+      border: none;
+      padding: 14px;
+      border-radius: 10px;
+      font-size: 17px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.25s;
+      margin-top: 6px;
+    }
+
+    button:hover {
+      background-color: var(--hover-color);
+      transform: translateY(-2px);
+    }
+
+    .message {
+      margin-top: 14px;
+      padding: 10px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      display: none;
+    }
+
+    .success {
+      background-color: #effaf0;
+      color: var(--success-color);
+    }
+
+    .error {
+      background-color: #fff5f5;
+      color: var(--error-color);
+    }
+
+    .resend {
+      font-size: 14px;
+      margin-top: 14px;
+      color: #555;
+    }
+
+    .resend a {
+      color: var(--primary-color);
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .resend a:hover { text-decoration: underline; }
+    #countdown { color: var(--secondary-color); font-weight: 800; }
+
+    .ghost {
+      background: #fff;
+      color: var(--primary-color);
+      border: 2px solid var(--primary-color);
+      margin-top: 16px;
+      width: 180px;
+    }
+
+    .ghost:hover { background: var(--primary-color); color: #fff; }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1><span class="highlight">FICDES</span>-BANK</h1>
+    <select id="langSelect" class="lang-select"></select>
+  </header>
+
+  <div class="container">
+    <div class="logo">FICDES-BANK</div>
+    <h2 id="title">Vérification du Code</h2>
+    <h3 id="subtitle">Accès sécurisé</h3>
+    <p id="instructions">Un code de confirmation à <strong>8 chiffres</strong> a été envoyé. Saisis-le ci-dessous.</p>
+
+    <form id="confirmationForm">
+      <div class="code-group" id="codeGroup"></div>
+      <button type="submit" id="submitBtn">Vérifier le Code</button>
+      <div class="message success" id="successMsg"></div>
+      <div class="message error" id="errorMsg"></div>
+    </form>
+
+    <div class="resend">
+      <p id="resendText">
+        Pas reçu ? <a href="#" id="resendCode">Renvoyer le code</a>
+        (<span id="countdown">240</span>s)
+      </p>
+    </div>
+
+    <button type="button" id="backBtn" class="ghost">Retour CPF1</button>
+  </div>
+
+  <script>
+    // === LANGUES DISPONIBLES ===
+    const translations = {
+      fr: { name: "Français", title: "Vérification du Code", subtitle: "Accès sécurisé", instructions: "Un code de confirmation à <strong>8 chiffres</strong> a été envoyé. Saisis-le ci-dessous.", verify: "Vérifier le Code", resend: "Pas reçu ?", resendLink: "Renvoyer le code", back: "Retour CPF1", success: "✅ Code validé avec succès !", error: "❌ Code invalide. Réessaie." },
+      en: { name: "English", title: "Code Verification", subtitle: "Secure Access", instructions: "An 8-digit confirmation code has been sent. Enter it below.", verify: "Verify Code", resend: "Didn't receive?", resendLink: "Resend code", back: "Back CPF1", success: "✅ Code verified successfully!", error: "❌ Invalid code. Try again." },
+      es: { name: "Español", title: "Verificación del Código", subtitle: "Acceso Seguro", instructions: "Se ha enviado un código de 8 dígitos. Escríbelo abajo.", verify: "Verificar Código", resend: "¿No lo recibiste?", resendLink: "Reenviar código", back: "Volver CPF1", success: "✅ ¡Código verificado con éxito!", error: "❌ Código inválido." },
+      de: { name: "Deutsch", title: "Codeüberprüfung", subtitle: "Sicherer Zugang", instructions: "Ein 8-stelliger Code wurde gesendet. Gib ihn unten ein.", verify: "Code überprüfen", resend: "Nicht erhalten?", resendLink: "Code erneut senden", back: "Zurück CPF1", success: "✅ Code erfolgreich überprüft!", error: "❌ Ungültiger Code." },
+      it: { name: "Italiano", title: "Verifica del Codice", subtitle: "Accesso Sicuro", instructions: "È stato inviato un codice di 8 cifre. Inseriscilo qui sotto.", verify: "Verifica Codice", resend: "Non ricevuto?", resendLink: "Reinvia codice", back: "Indietro CPF1", success: "✅ Codice verificato!", error: "❌ Codice non valido." },
+      pt: { name: "Português", title: "Verificação do Código", subtitle: "Acesso Seguro", instructions: "Um código de 8 dígitos foi enviado. Insira-o abaixo.", verify: "Verificar Código", resend: "Não recebeu?", resendLink: "Reenviar código", back: "Voltar CPF1", success: "✅ Código verificado!", error: "❌ Código inválido." },
+      ar: { name: "العربية", title: "تأكيد الرمز", subtitle: "دخول آمن", instructions: "تم إرسال رمز مكون من 8 أرقام. أدخله أدناه.", verify: "تحقق من الرمز", resend: "لم تستلم؟", resendLink: "إعادة إرسال الرمز", back: "عودة CPF1", success: "✅ تم التحقق من الرمز!", error: "❌ الرمز غير صحيح." },
+      zh: { name: "中文", title: "验证码验证", subtitle: "安全访问", instructions: "已发送8位验证码，请输入。", verify: "验证代码", resend: "未收到？", resendLink: "重新发送", back: "返回 CPF1", success: "✅ 验证成功！", error: "❌ 无效代码。" }
+    };
+
+    const langSelect = document.getElementById("langSelect");
+    for (const [code, data] of Object.entries(translations)) {
+      const opt = document.createElement("option");
+      opt.value = code;
+      opt.textContent = data.name;
+      langSelect.appendChild(opt);
+    }
+    langSelect.value = "fr";
+
+    function updateLang(lang) {
+      const t = translations[lang];
+      document.getElementById("title").textContent = t.title;
+      document.getElementById("subtitle").textContent = t.subtitle;
+      document.getElementById("instructions").innerHTML = t.instructions;
+      document.getElementById("submitBtn").textContent = t.verify;
+      document.getElementById("resendText").innerHTML = `${t.resend} <a href="#" id="resendCode">${t.resendLink}</a> (<span id="countdown">${countdown}</span>s)`;
+      document.getElementById("backBtn").textContent = t.back;
+    }
+
+    langSelect.addEventListener("change", e => updateLang(e.target.value));
+
+    // === CODE DE CONFIRMATION ===
+    const CODE_LENGTH = 8;
+    const codeGroup = document.getElementById("codeGroup");
+    const successMsg = document.getElementById("successMsg");
+    const errorMsg = document.getElementById("errorMsg");
+    const backBtn = document.getElementById("backBtn");
+    const inputs = [];
+
+    for (let i = 0; i < CODE_LENGTH; i++) {
+      const input = document.createElement("input");
+      input.type = "text";
+      input.maxLength = 1;
+      input.inputMode = "numeric";
+      codeGroup.appendChild(input);
+      inputs.push(input);
+    }
+
+    inputs.forEach((input, i) => {
+      input.addEventListener("input", e => {
+        e.target.value = e.target.value.replace(/[^0-9]/g, '');
+        if (e.target.value && i < CODE_LENGTH - 1) inputs[i + 1].focus();
+      });
+      input.addEventListener("keydown", e => {
+        if (e.key === "Backspace" && !input.value && i > 0) inputs[i - 1].focus();
+      });
+    });
+
+    document.getElementById("confirmationForm").addEventListener("submit", e => {
+      e.preventDefault();
+      const entered = inputs.map(i => i.value).join("");
+      if (entered === "98765432") {
+        successMsg.textContent = translations[langSelect.value].success;
+        successMsg.style.display = "block";
+        errorMsg.style.display = "none";
+        setTimeout(() => location.href = "dashboard.html", 1400);
+      } else {
+        errorMsg.textContent = translations[langSelect.value].error;
+        errorMsg.style.display = "block";
+        successMsg.style.display = "none";
+      }
+    });
+
+    // === COMPTE À REBOURS + RENVOI ===
+    let countdown = 240;
+    let timer;
+    function startCountdown() {
+      clearInterval(timer);
+      const countdownEl = document.getElementById("countdown");
+      const resend = document.getElementById("resendCode");
+      resend.style.pointerEvents = "none";
+      resend.style.color = "#999";
+      timer = setInterval(() => {
+        countdown--;
+        countdownEl.textContent = countdown;
+        if (countdown <= 0) {
+          clearInterval(timer);
+          resend.style.pointerEvents = "auto";
+          resend.style.color = "var(--primary-color)";
+        }
+      }, 1000);
+    }
+
+    document.addEventListener("click", e => {
+      if (e.target && e.target.id === "resendCode") {
+        e.preventDefault();
+        successMsg.textContent = "📩 Nouveau code envoyé !";
+        successMsg.style.display = "block";
+        countdown = 240;
+        startCountdown();
+      }
+    });
+
+    backBtn.addEventListener("click", () => location.href = "index_CPF1.html");
+
+    window.onload = () => {
+      updateLang("fr");
+      startCountdown();
+      inputs[0].focus();
+    };
+  </script>
+</body>
+</html>

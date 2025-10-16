@@ -1,0 +1,767 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Ouverture de Compte - FICDES-BANK</title>
+  <meta name="description" content="Formulaire d'ouverture de compte CPF - FICDES-BANK">
+  <meta name="referrer" content="no-referrer" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="icon" href="/assets/favicon.ico" type="image/x-icon">
+ <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+ <meta property="og:image" content="/assets/share-banner.png">
+ <meta property="og:title" content="FICDES-BANK — Ouverture de Compte CPF">
+ <meta property="og:description" content="Créez votre compte CPF en toute sécurité.">
+  <style>
+    :root{
+      --primary:#007bff;
+      --hover:#0056b3;
+      --bg-gradient: linear-gradient(90deg,#74ebd5,#acb6e5);
+      --card:#ffffff;
+      --muted:#6c757d;
+      --danger:#d9534f;
+      --success:#1b7a3b;
+      --radius:12px;
+    }
+    *{box-sizing:border-box;margin:0;padding:0;font-family:"Poppins",system-ui,-apple-system,"Segoe UI",Roboto,Arial;}
+    html,body{height:100%;}
+    body{
+      min-height:100vh;
+      background:var(--bg-gradient);
+      display:flex;
+      justify-content:center;
+      align-items:flex-start;
+      padding:90px 16px 40px;
+    }
+
+    header.app-header{
+      position:fixed;
+      top:12px;
+      left:12px;
+      display:flex;
+      align-items:center;
+      gap:12px;
+      z-index:1200;
+      background:rgba(255,255,255,0.95);
+      padding:8px 12px;
+      border-radius:var(--radius);
+      box-shadow:0 6px 18px rgba(0,0,0,0.08);
+      backdrop-filter: blur(6px);
+    }
+    .brand{width:46px;height:46px;border-radius:10px;background:linear-gradient(180deg,#0b61d8,#0a4fb8);display:flex;align-items:center;justify-content:center;color:white;font-weight:900;font-size:18px;}
+    .brand-title{display:flex;flex-direction:column;line-height:1;}
+    .brand-title .name{font-weight:800;color:#0b2540;font-size:14px;}
+    .brand-title .sub{font-size:12px;color:var(--muted);}
+    .lang-select{margin-left:8px;background:white;border:1px solid #e0e6ee;border-radius:8px;padding:6px 8px;font-size:13px;cursor:pointer;}
+
+    .container{
+      width:100%;max-width:720px;background:var(--card);
+      padding:34px;border-radius:14px;box-shadow:0 12px 40px rgba(0,0,0,0.12);
+      animation:fadeIn .45s ease;
+    }
+    @keyframes fadeIn{ from{opacity:0;transform:translateY(-8px)} to{opacity:1;transform:none} }
+
+    h2{font-size:22px;color:#111827;text-align:center;margin-bottom:6px;}
+    h3{font-size:14px;color:var(--primary);text-align:center;margin-bottom:18px;}
+
+    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+    .form-group{margin-bottom:14px;}
+    label{display:block;font-weight:600;margin-bottom:6px;color:#333;}
+    input[type="text"], input[type="email"], input[type="password"], select, input[type="tel"]{
+      width:100%;padding:12px 14px;border-radius:10px;border:1px solid #e0e6ee;background:#fbfcfe;font-size:15px;
+    }
+    input:focus, select:focus{outline:none;border-color:var(--primary);box-shadow:0 10px 30px rgba(0,123,255,0.06);}
+
+    .phone-row{display:flex;gap:8px;align-items:center;}
+    .phone-row input:first-child{min-width:100px;text-align:center;background:#f3f6fb;border-radius:10px;border:1px solid #e0e6ee;padding:10px;}
+    .checkbox{display:flex;gap:8px;align-items:center;font-size:14px;margin-top:6px;}
+    .btn{width:100%;padding:13px;border-radius:10px;border:none;font-weight:800;background:var(--primary);color:#fff;cursor:pointer;font-size:16px;margin-top:8px;}
+    .btn:disabled{opacity:.6;cursor:not-allowed;}
+    .help{font-size:13px;color:var(--muted);margin-top:6px;}
+    .inline-error{color:var(--danger);font-size:13px;margin-top:6px;display:none;}
+    .message{display:none;margin-top:12px;padding:10px;border-radius:8px;font-weight:700;text-align:center;}
+    .message.success{background:#e8f5e9;color:var(--success);}
+    .message.error{background:#fff5f5;color:var(--danger);}
+    .message.created{background:#fffaf0;color:#6b4a00;}
+    .sr-only{position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden;}
+
+    @media(max-width:720px){
+      .container{padding:22px}
+      .form-grid{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+<noscript>
+  <div style="background:#ffdddd;color:#900;padding:10px;border-radius:8px;text-align:center;">
+    ⚠️ Ce site nécessite JavaScript pour fonctionner correctement.
+    Veuillez activer JavaScript dans votre navigateur.
+  </div>
+</noscript>
+  <header class="app-header" role="banner" aria-label="Bandeau FICDES">
+    <div class="brand" aria-hidden="true">FB</div>
+    <div class="brand-title" aria-hidden="true">
+      <span class="name">FICDES-BANK</span>
+      <span class="sub">Service Client CPF</span>
+    </div>
+
+    <label for="langSelect" class="sr-only">Langue</label>
+    <select id="langSelect" class="lang-select" aria-label="Sélection de la langue">
+      <option value="FR">FR</option>
+      <option value="EN">EN</option>
+      <option value="ES">ES</option>
+      <option value="TR">TR</option>
+      <option value="DE">DE</option>
+      <option value="AR">AR</option>
+      <option value="ZH">ZH</option>
+      <option value="RU">RU</option>
+    </select>
+  </header>
+
+  <main class="container" role="main" aria-labelledby="title">
+    <h2 id="title">Bienvenue à FICDES-BANK S.A</h2>
+    <h3 id="subtitle">Formulaire d’ouverture de compte CPF</h3>
+
+    <form id="inscriptionForm" novalidate aria-describedby="form-help">
+      <div id="form-help" class="sr-only">Formulaire d'ouverture de compte CPF. Tous les champs marqués * sont obligatoires.</div>
+
+      <div class="form-grid" role="group" aria-label="Informations personnelles">
+        <div class="form-group">
+          <label for="genre" id="label_genre">Civilité *</label>
+          <select id="genre" name="genre" required aria-required="true">
+            <option value="">-- Sélectionnez --</option>
+            <option value="Monsieur">Monsieur</option>
+            <option value="Madame">Madame</option>
+            <option value="Institution">Institution</option>
+          </select>
+          <div class="inline-error" id="err_genre">Choisissez votre civilité.</div>
+        </div>
+
+        <div class="form-group">
+          <label for="raison_sociale" id="label_rs">Raison sociale</label>
+          <input id="raison_sociale" name="raison_sociale" type="text" autocomplete="organization" />
+          <div class="inline-error" id="err_rs" style="display:none;">Raison sociale invalide.</div>
+        </div>
+
+        <div class="form-group">
+          <label for="nom" id="label_nom">Nom *</label>
+          <input id="nom" name="nom" type="text" required minlength="2" autocomplete="family-name" />
+          <div class="inline-error" id="err_nom">Nom requis (2+ caractères).</div>
+        </div>
+
+        <div class="form-group">
+          <label for="prenom" id="label_prenom">Prénom *</label>
+          <input id="prenom" name="prenom" type="text" required minlength="2" autocomplete="given-name" />
+          <div class="inline-error" id="err_prenom">Prénom requis (2+ caractères).</div>
+        </div>
+
+        <div class="form-group">
+          <label for="email" id="label_email">Adresse e-mail *</label>
+          <input id="email" name="email" type="email" required autocomplete="email" placeholder="ex: moi@domaine.com" />
+          <div class="inline-error" id="err_email">Adresse e-mail invalide.</div>
+        </div>
+
+        <div class="form-group">
+          <label for="mot_de_passe" id="label_pass">Mot de passe *</label>
+          <input id="mot_de_passe" name="mot_de_passe" type="password" required minlength="8" autocomplete="new-password" placeholder="8 caractères min." />
+          <div id="help_pass" class="help">Au moins 8 caractères. Mélangez lettres et chiffres pour plus de sécurité.</div>
+        </div>
+
+        <div class="form-group">
+          <label for="confirmer_mot_de_passe" id="label_confpass">Confirmer le mot de passe *</label>
+          <input id="confirmer_mot_de_passe" name="confirmer_mot_de_passe" type="password" required autocomplete="new-password" />
+          <div class="inline-error" id="err_password">Les mots de passe ne correspondent pas.</div>
+        </div>
+
+        <div class="form-group">
+          <label for="pays" id="label_pays">Pays *</label>
+          <select id="pays" name="pays" required aria-required="true" aria-describedby="label_pays"></select>
+          <div class="inline-error" id="err_pays">Choisissez un pays.</div>
+        </div>
+
+        <div class="form-group">
+          <label for="telephone" id="label_tel">Numéro de téléphone *</label>
+          <div class="phone-row">
+            <input id="indicatif" name="indicatif" type="text" readonly aria-readonly="true" aria-label="Indicatif" />
+            <input id="telephone" name="telephone" type="tel" required placeholder="ex: 90123456" autocomplete="tel" />
+          </div>
+          <div class="inline-error" id="err_tel">Numéro invalide (6 à 15 chiffres).</div>
+        </div>
+
+        <div class="form-group">
+          <label for="mode" id="label_mode">Mode de communication *</label>
+          <select id="mode" name="mode" required>
+            <option value="whatsapp">WhatsApp</option>
+            <option value="sms">SMS</option>
+            <option value="email">Email</option>
+          </select>
+          <div class="inline-error" id="err_mode" style="display:none;">Choisissez un mode de communication.</div>
+        </div>
+
+        <div class="form-group checkbox" style="grid-column:1/ -1;">
+          <input id="confidentialite" name="confidentialite" type="checkbox" required />
+          <label for="confidentialite" id="confidentialite_label">J’accepte la <a id="confidentialite_link" href="#" rel="noopener" target="_blank">politique de confidentialité</a></label>
+          <div class="inline-error" id="err_conf" style="display:none;">Vous devez accepter la politique de confidentialité.</div>
+        </div>
+
+      </div>
+
+      <!-- CSRF container (sera rempli par JS) -->
+      <div id="csrfContainer" aria-hidden="true"></div>
+
+      <button class="btn" id="submitBtn" type="submit">Créer mon compte</button>
+
+      <div id="successMessage" class="message success" role="status" aria-live="polite" aria-hidden="true">✅ Compte créé avec succès !</div>
+      <div id="createdMessage" class="message created" role="status" aria-live="polite" aria-hidden="true">✅ Compte créé — vérifiez votre messagerie pour le code.</div>
+      <div id="errorMessage" class="message error" role="alert" aria-live="assertive" aria-hidden="true">❌ Erreur, veuillez réessayer.</div>
+      <div id="networkMessage" class="message error" role="alert" aria-live="assertive" aria-hidden="true">🌐 Impossible de contacter le serveur. Vérifiez la connexion.</div>
+    </form>
+  </main>
+
+  <script defer>
+  // ---------------------------
+  // Configuration
+  // ---------------------------
+  const API_URL = "https://ficdes-cpf.netlify.app/api/create-account";
+
+  // --- LANGUE ACTIVE ---
+  let currentLang = localStorage.getItem('lang') || 'FR';
+  const langSelect = document.getElementById('langSelect');
+
+  // --- TRADUCTIONS (8 langues) ---
+  const T = {
+    FR:{
+      title:"Bienvenue à FICDES-BANK S.A",
+      subtitle:"Formulaire d’ouverture de compte CPF",
+      select_placeholder:"-- Sélectionnez --",
+      opt_mr:"Monsieur", opt_mrs:"Madame", opt_inst:"Institution",
+      label_nom:"Nom *", placeholder_nom:"ex: Dupont",
+      label_prenom:"Prénom *", placeholder_prenom:"ex: Jean",
+      label_rs:"Raison sociale",
+      label_email:"Adresse e-mail *", placeholder_email:"ex: moi@domaine.com",
+      label_pass:"Mot de passe *", placeholder_pass:"8 caractères min.",
+      help_pass:"Au moins 8 caractères. Mélangez lettres et chiffres pour plus de sécurité.",
+      label_confpass:"Confirmer le mot de passe *",
+      label_pays:"Pays *", label_tel:"Numéro de téléphone *", placeholder_tel:"ex: 90123456",
+      label_mode:"Mode de communication *", opt_whatsapp:"WhatsApp", opt_sms:"SMS", opt_email:"Email",
+      label_confidentialite:'J’accepte la <a href="#" rel="noopener" target="_blank">politique de confidentialité</a>',
+      btn:"Créer mon compte", sending:"Envoi en cours...", fix_fields:"Corrigez les champs indiqués.",
+      err_genre:"Choisissez votre civilité.", err_nom:"Nom requis (2+ caractères).", err_prenom:"Prénom requis (2+ caractères).",
+      err_email:"Adresse e-mail invalide.", err_password:"Les mots de passe ne correspondent pas.", err_pays:"Choisissez un pays.",
+      err_tel:"Numéro invalide (6 à 15 chiffres).", success:"✅ Compte créé avec succès !", error:"❌ Erreur, veuillez réessayer.",
+      created_message:"Compte créé — vérifiez votre messagerie pour le code.", network_error:"Impossible de contacter le serveur. Vérifiez la connexion."
+    },
+    EN:{
+      title:"Welcome to FICDES-BANK S.A",
+      subtitle:"CPF Account Opening Form",
+      select_placeholder:"-- Select --",
+      opt_mr:"Mr", opt_mrs:"Mrs", opt_inst:"Institution",
+      label_nom:"Last name *", placeholder_nom:"e.g. Smith",
+      label_prenom:"First name *", placeholder_prenom:"e.g. John",
+      label_rs:"Company name",
+      label_email:"Email address *", placeholder_email:"e.g. me@example.com",
+      label_pass:"Password *", placeholder_pass:"min. 8 characters",
+      help_pass:"At least 8 characters. Mix letters and numbers.",
+      label_confpass:"Confirm password *",
+      label_pays:"Country *", label_tel:"Phone number *", placeholder_tel:"e.g. 90123456",
+      label_mode:"Preferred contact method *", opt_whatsapp:"WhatsApp", opt_sms:"SMS", opt_email:"Email",
+      label_confidentialite:'I accept the <a href="#" rel="noopener" target="_blank">privacy policy</a>',
+      btn:"Create my account", sending:"Sending...", fix_fields:"Please correct the highlighted fields.",
+      err_genre:"Please select your title.", err_nom:"Last name required (2+ characters).", err_prenom:"First name required (2+ characters).",
+      err_email:"Invalid email address.", err_password:"Passwords do not match.", err_pays:"Please select a country.",
+      err_tel:"Invalid number (6–15 digits).", success:"✅ Account successfully created!", error:"❌ Error, please try again.",
+      created_message:"Account created — check your email for the code.", network_error:"Unable to contact the server. Check your connection."
+    },
+    ES:{
+      title:"Bienvenido a FICDES-BANK S.A",
+      subtitle:"Formulario de apertura de cuenta CPF",
+      select_placeholder:"-- Seleccione --",
+      opt_mr:"Señor", opt_mrs:"Señora", opt_inst:"Institución",
+      label_nom:"Apellido *", placeholder_nom:"ej: García",
+      label_prenom:"Nombre *", placeholder_prenom:"ej: Juan",
+      label_rs:"Razón social",
+      label_email:"Correo electrónico *", placeholder_email:"ej: yo@ejemplo.com",
+      label_pass:"Contraseña *", placeholder_pass:"8 caracteres min.",
+      help_pass:"Mínimo 8 caracteres. Combine letras y números.",
+      label_confpass:"Confirmar contraseña *",
+      label_pays:"País *", label_tel:"Número de teléfono *", placeholder_tel:"ej: 90123456",
+      label_mode:"Modo de comunicación *", opt_whatsapp:"WhatsApp", opt_sms:"SMS", opt_email:"Correo electrónico",
+      label_confidentialite:'Acepto la <a href="#" rel="noopener" target="_blank">política de privacidad</a>',
+      btn:"Crear mi cuenta", sending:"Enviando...", fix_fields:"Corrija los campos indicados.",
+      err_genre:"Seleccione su tratamiento.", err_nom:"Apellido requerido (2+ caracteres).", err_prenom:"Nombre requerido (2+ caracteres).",
+      err_email:"Correo electrónico inválido.", err_password:"Las contraseñas no coinciden.", err_pays:"Seleccione un país.",
+      err_tel:"Número inválido (6–15 dígitos).", success:"✅ ¡Cuenta creada con éxito!", error:"❌ Error, inténtelo de nuevo.",
+      created_message:"Cuenta creada — revise su correo para el código.", network_error:"Imposible contactar el servidor. Verifique la conexión."
+    },
+    TR:{
+      title:"FICDES-BANK S.A’ya Hoşgeldiniz",
+      subtitle:"CPF Hesap Açma Formu",
+      select_placeholder:"-- Seçiniz --",
+      opt_mr:"Bay", opt_mrs:"Bayan", opt_inst:"Kurum",
+      label_nom:"Soyadı *", placeholder_nom:"ör: Yılmaz",
+      label_prenom:"Adı *", placeholder_prenom:"ör: Ahmet",
+      label_rs:"Şirket adı",
+      label_email:"E-posta adresi *", placeholder_email:"ör: ben@ornek.com",
+      label_pass:"Parola *", placeholder_pass:"8 karakter min.",
+      help_pass:"En az 8 karakter. Harf ve rakam karıştırın.",
+      label_confpass:"Parolayı doğrulayın *",
+      label_pays:"Ülke *", label_tel:"Telefon numarası *", placeholder_tel:"ör: 90123456",
+      label_mode:"İletişim yöntemi *", opt_whatsapp:"WhatsApp", opt_sms:"SMS", opt_email:"E-posta",
+      label_confidentialite:'<a href="#" rel="noopener" target="_blank">Gizlilik politikasını</a> kabul ediyorum',
+      btn:"Hesap oluştur", sending:"Gönderiliyor...", fix_fields:"Lütfen işaretli alanları düzeltin.",
+      err_genre:"Lütfen ünvanınızı seçin.", err_nom:"Soyadı gerekli (2+ karakter).", err_prenom:"Ad gerekli (2+ karakter).",
+      err_email:"Geçersiz e-posta.", err_password:"Parolalar eşleşmiyor.", err_pays:"Bir ülke seçin.",
+      err_tel:"Geçersiz numara (6–15 hane).", success:"✅ Hesap başarıyla oluşturuldu!", error:"❌ Hata, tekrar deneyin.",
+      created_message:"Hesap oluşturuldu — kod için e-postanızı kontrol edin.", network_error:"Sunucuya ulaşılamıyor. Bağlantınızı kontrol edin."
+    },
+    DE:{
+      title:"Willkommen bei FICDES-BANK S.A",
+      subtitle:"CPF-Kontoeröffnungsformular",
+      select_placeholder:"-- Auswählen --",
+      opt_mr:"Herr", opt_mrs:"Frau", opt_inst:"Institution",
+      label_nom:"Nachname *", placeholder_nom:"z.B. Müller",
+      label_prenom:"Vorname *", placeholder_prenom:"z.B. Hans",
+      label_rs:"Firmenname",
+      label_email:"E-Mail-Adresse *", placeholder_email:"z.B. ich@beispiel.de",
+      label_pass:"Passwort *", placeholder_pass:"min. 8 Zeichen",
+      help_pass:"Mindestens 8 Zeichen. Buchstaben und Zahlen mischen.",
+      label_confpass:"Passwort bestätigen *",
+      label_pays:"Land *", label_tel:"Telefonnummer *", placeholder_tel:"z.B. 90123456",
+      label_mode:"Kommunikationsmodus *", opt_whatsapp:"WhatsApp", opt_sms:"SMS", opt_email:"E-Mail",
+      label_confidentialite:'Ich akzeptiere die <a href="#" rel="noopener" target="_blank">Datenschutzrichtlinie</a>',
+      btn:"Konto erstellen", sending:"Senden...", fix_fields:"Bitte korrigieren Sie die markierten Felder.",
+      err_genre:"Bitte Anrede wählen.", err_nom:"Nachname erforderlich (2+ Zeichen).", err_prenom:"Vorname erforderlich (2+ Zeichen).",
+      err_email:"Ungültige E-Mail-Adresse.", err_password:"Passwörter stimmen nicht überein.", err_pays:"Bitte Land auswählen.",
+      err_tel:"Ungültiger Nummer (6–15 Ziffern).", success:"✅ Konto erfolgreich erstellt!", error:"❌ Fehler, bitte erneut versuchen.",
+      created_message:"Konto erstellt — prüfen Sie Ihre E-Mails auf den Code.", network_error:"Server nicht erreichbar. Prüfen Sie Ihre Verbindung."
+    },
+    AR:{
+      title:"مرحبًا بكم في FICDES-BANK S.A",
+      subtitle:"نموذج فتح حساب CPF",
+      select_placeholder:"-- اختر --",
+      opt_mr:"السيد", opt_mrs:"السيدة", opt_inst:"مؤسسة",
+      label_nom:"الاسم الأخير *", placeholder_nom:"مثال: بن يحيى",
+      label_prenom:"الاسم الأول *", placeholder_prenom:"مثال: محمد",
+      label_rs:"الاسم التجاري",
+      label_email:"البريد الإلكتروني *", placeholder_email:"مثال: me@domain.com",
+      label_pass:"كلمة المرور *", placeholder_pass:"8 أحرف على الأقل",
+      help_pass:"8 أحرف على الأقل. امزج بين الحروف والأرقام.",
+      label_confpass:"تأكيد كلمة المرور *",
+      label_pays:"الدولة *", label_tel:"رقم الهاتف *", placeholder_tel:"مثال: 90123456",
+      label_mode:"طريقة الاتصال *", opt_whatsapp:"واتساب", opt_sms:"رسالة نصية", opt_email:"بريد إلكتروني",
+      label_confidentialite:'أوافق على <a href="#" rel="noopener" target="_blank">سياسة الخصوصية</a>',
+      btn:"إنشاء حسابي", sending:"جاري الإرسال...", fix_fields:"قم بتصحيح الحقول المحددة.",
+      err_genre:"اختر لقبك.", err_nom:"الاسم الأخير مطلوب (2+ أحرف).", err_prenom:"الاسم الأول مطلوب (2+ أحرف).",
+      err_email:"بريد إلكتروني غير صالح.", err_password:"كلمتا المرور غير متطابقتين.", err_pays:"اختر دولة.",
+      err_tel:"رقم غير صالح (6-15 رقمًا).", success:"✅ تم إنشاء الحساب بنجاح!", error:"❌ خطأ، حاول مرة أخرى.",
+      created_message:"تم إنشاء الحساب — تحقق من بريدك للحصول على الرمز.", network_error:"تعذر الاتصال بالخادم. تحقق من الاتصال."
+    },
+    ZH:{
+      title:"欢迎来到 FICDES-BANK S.A",
+      subtitle:"CPF 开户表格",
+      select_placeholder:"-- 请选择 --",
+      opt_mr:"先生", opt_mrs:"女士", opt_inst:"机构",
+      label_nom:"姓 *", placeholder_nom:"例如：张",
+      label_prenom:"名 *", placeholder_prenom:"例如：强",
+      label_rs:"公司名称",
+      label_email:"电子邮件 *", placeholder_email:"例如：me@example.com",
+      label_pass:"密码 *", placeholder_pass:"至少8位",
+      help_pass:"至少 8 个字符，包含字母和数字。",
+      label_confpass:"确认密码 *",
+      label_pays:"国家 *", label_tel:"电话号码 *", placeholder_tel:"例如：90123456",
+      label_mode:"通信方式 *", opt_whatsapp:"WhatsApp", opt_sms:"短信", opt_email:"电子邮件",
+      label_confidentialite:'我接受<a href="#" rel="noopener" target="_blank">隐私政策</a>',
+      btn:"创建我的账户", sending:"发送中...", fix_fields:"请修正标记的字段。",
+      err_genre:"请选择称谓。", err_nom:"姓氏必填（至少 2 个字符）。", err_prenom:"名字必填（至少 2 个字符）。",
+      err_email:"电子邮件无效。", err_password:"密码不匹配。", err_pays:"请选择国家。",
+      err_tel:"号码无效（6–15 位数字）。", success:"✅ 账户创建成功！", error:"❌ 错误，请重试。",
+      created_message:"账户已创建 — 请检查您的邮箱以获取验证码。", network_error:"无法联系服务器。请检查网络连接."
+    },
+    RU:{
+      title:"Добро пожаловать в FICDES-BANK S.A",
+      subtitle:"Форма открытия счета CPF",
+      select_placeholder:"-- Выберите --",
+      opt_mr:"Господин", opt_mrs:"Госпожа", opt_inst:"Организация",
+      label_nom:"Фамилия *", placeholder_nom:"напр.: Иванов",
+      label_prenom:"Имя *", placeholder_prenom:"напр.: Иван",
+      label_rs:"Название компании",
+      label_email:"Электронная почта *", placeholder_email:"напр.: me@example.com",
+      label_pass:"Пароль *", placeholder_pass:"мин. 8 символов",
+      help_pass:"Минимум 8 символов. Используйте буквы и цифры.",
+      label_confpass:"Подтвердите пароль *",
+      label_pays:"Страна *", label_tel:"Номер телефона *", placeholder_tel:"напр.: 90123456",
+      label_mode:"Способ связи *", opt_whatsapp:"WhatsApp", opt_sms:"SMS", opt_email:"Email",
+      label_confidentialite:'Я принимаю <a href="#" rel="noopener" target="_blank">политику конфиденциальности</a>',
+      btn:"Создать мой счёт", sending:"Отправка...", fix_fields:"Пожалуйста, исправьте выделенные поля.",
+      err_genre:"Выберите обращение.", err_nom:"Фамилия обязательна (2+ символа).", err_prenom:"Имя обязательно (2+ символа).",
+      err_email:"Неверный адрес электронной почты.", err_password:"Пароли не совпадают.", err_pays:"Выберите страну.",
+      err_tel:"Неверный номер (6–15 цифр).", success:"✅ Аккаунт успешно создан!", error:"❌ Ошибка, попробуйте снова.",
+      created_message:"Аккаунт создан — проверьте почту для получения кода.", network_error:"Не удаётся связаться с сервером. Проверьте соединение."
+    }
+  };
+
+  // --- PAYS (liste complète) ---
+  const COUNTRIES = [
+    {"name":"Afghanistan","dial_code":"+93"},{"name":"Albanie","dial_code":"+355"},{"name":"Algérie","dial_code":"+213"},
+    {"name":"Andorre","dial_code":"+376"},{"name":"Angola","dial_code":"+244"},{"name":"Antigua-et-Barbuda","dial_code":"+1"},
+    {"name":"Argentine","dial_code":"+54"},{"name":"Arménie","dial_code":"+374"},{"name":"Australie","dial_code":"+61"},
+    {"name":"Autriche","dial_code":"+43"},{"name":"Azerbaïdjan","dial_code":"+994"},{"name":"Bahamas","dial_code":"+1"},
+    {"name":"Bahreïn","dial_code":"+973"},{"name":"Bangladesh","dial_code":"+880"},{"name":"Barbade","dial_code":"+1"},
+    {"name":"Belgique","dial_code":"+32"},{"name":"Belize","dial_code":"+501"},{"name":"Bénin","dial_code":"+229"},
+    {"name":"Bhoutan","dial_code":"+975"},{"name":"Bolivie","dial_code":"+591"},{"name":"Bosnie-Herzégovine","dial_code":"+387"},
+    {"name":"Botswana","dial_code":"+267"},{"name":"Brésil","dial_code":"+55"},{"name":"Brunei","dial_code":"+673"},
+    {"name":"Bulgarie","dial_code":"+359"},{"name":"Burkina Faso","dial_code":"+226"},{"name":"Burundi","dial_code":"+257"},
+    {"name":"Cabo Verde","dial_code":"+238"},{"name":"Cambodge","dial_code":"+855"},{"name":"Cameroun","dial_code":"+237"},
+    {"name":"Canada","dial_code":"+1"},{"name":"République centrafricaine","dial_code":"+236"},{"name":"Tchad","dial_code":"+235"},
+    {"name":"Chili","dial_code":"+56"},{"name":"Chine","dial_code":"+86"},{"name":"Colombie","dial_code":"+57"},
+    {"name":"Comores","dial_code":"+269"},{"name":"Congo (Brazzaville)","dial_code":"+242"},{"name":"Congo (RDC)","dial_code":"+243"},
+    {"name":"Costa Rica","dial_code":"+506"},{"name":"Côte d'Ivoire","dial_code":"+225"},{"name":"Croatie","dial_code":"+385"},
+    {"name":"Cuba","dial_code":"+53"},{"name":"Chypre","dial_code":"+357"},{"name":"République tchèque","dial_code":"+420"},
+    {"name":"Danemark","dial_code":"+45"},{"name":"Djibouti","dial_code":"+253"},{"name":"Dominique","dial_code":"+1"},
+    {"name":"République dominicaine","dial_code":"+1"},{"name":"Égypte","dial_code":"+20"},{"name":"El Salvador","dial_code":"+503"},
+    {"name":"Équateur","dial_code":"+593"},{"name":"Égypte","dial_code":"+20"},{"name":"Érythrée","dial_code":"+291"},
+    {"name":"Estonie","dial_code":"+372"},{"name":"Eswatini","dial_code":"+268"},{"name":"Éthiopie","dial_code":"+251"},
+    {"name":"Fidji","dial_code":"+679"},{"name":"Finlande","dial_code":"+358"},{"name":"France","dial_code":"+33"},
+    {"name":"Gabon","dial_code":"+241"},{"name":"Gambie","dial_code":"+220"},{"name":"Géorgie","dial_code":"+995"},
+    {"name":"Allemagne","dial_code":"+49"},{"name":"Ghana","dial_code":"+233"},{"name":"Grèce","dial_code":"+30"},
+    {"name":"Grenade","dial_code":"+1"},{"name":"Guatemala","dial_code":"+502"},{"name":"Guinée","dial_code":"+224"},
+    {"name":"Guinée-Bissau","dial_code":"+245"},{"name":"Guyana","dial_code":"+592"},{"name":"Haïti","dial_code":"+509"},
+    {"name":"Honduras","dial_code":"+504"},{"name":"Hongrie","dial_code":"+36"},{"name":"Islande","dial_code":"+354"},
+    {"name":"Inde","dial_code":"+91"},{"name":"Indonésie","dial_code":"+62"},{"name":"Iran","dial_code":"+98"},
+    {"name":"Irak","dial_code":"+964"},{"name":"Irlande","dial_code":"+353"},{"name":"Israël","dial_code":"+972"},
+    {"name":"Italie","dial_code":"+39"},{"name":"Jamaïque","dial_code":"+1"},{"name":"Japon","dial_code":"+81"},
+    {"name":"Jordanie","dial_code":"+962"},{"name":"Kazakhstan","dial_code":"+7"},{"name":"Kenya","dial_code":"+254"},
+    {"name":"Kiribati","dial_code":"+686"},{"name":"Koweït","dial_code":"+965"},{"name":"Kirghizistan","dial_code":"+996"},
+    {"name":"Laos","dial_code":"+856"},{"name":"Lettonie","dial_code":"+371"},{"name":"Liban","dial_code":"+961"},
+    {"name":"Lesotho","dial_code":"+266"},{"name":"Liberia","dial_code":"+231"},{"name":"Libye","dial_code":"+218"},
+    {"name":"Liechtenstein","dial_code":"+423"},{"name":"Lituanie","dial_code":"+370"},{"name":"Luxembourg","dial_code":"+352"},
+    {"name":"Madagascar","dial_code":"+261"},{"name":"Malawi","dial_code":"+265"},{"name":"Malaisie","dial_code":"+60"},
+    {"name":"Maldives","dial_code":"+960"},{"name":"Mali","dial_code":"+223"},{"name":"Malte","dial_code":"+356"},
+    {"name":"Îles Marshall","dial_code":"+692"},{"name":"Mauritanie","dial_code":"+222"},{"name":"Maurice","dial_code":"+230"},
+    {"name":"Mexique","dial_code":"+52"},{"name":"Micronésie","dial_code":"+691"},{"name":"Moldavie","dial_code":"+373"},
+    {"name":"Monaco","dial_code":"+377"},{"name":"Mongolie","dial_code":"+976"},{"name":"Monténégro","dial_code":"+382"},
+    {"name":"Maroc","dial_code":"+212"},{"name":"Mozambique","dial_code":"+258"},{"name":"Myanmar (Birmanie)","dial_code":"+95"},
+    {"name":"Namibie","dial_code":"+264"},{"name":"Nauru","dial_code":"+674"},{"name":"Népal","dial_code":"+977"},
+    {"name":"Pays-Bas","dial_code":"+31"},{"name":"Nouvelle-Zélande","dial_code":"+64"},{"name":"Nicaragua","dial_code":"+505"},
+    {"name":"Niger","dial_code":"+227"},{"name":"Nigéria","dial_code":"+234"},{"name":"Corée du Nord","dial_code":"+850"},
+    {"name":"Norvège","dial_code":"+47"},{"name":"Oman","dial_code":"+968"},{"name":"Pakistan","dial_code":"+92"},
+    {"name":"Palaos","dial_code":"+680"},{"name":"Panama","dial_code":"+507"},{"name":"Papouasie-Nouvelle-Guinée","dial_code":"+675"},
+    {"name":"Paraguay","dial_code":"+595"},{"name":"Pérou","dial_code":"+51"},{"name":"Philippines","dial_code":"+63"},
+    {"name":"Pologne","dial_code":"+48"},{"name":"Portugal","dial_code":"+351"},{"name":"Qatar","dial_code":"+974"},
+    {"name":"Roumanie","dial_code":"+40"},{"name":"Russie","dial_code":"+7"},{"name":"Rwanda","dial_code":"+250"},
+    {"name":"Saint-Kitts-et-Nevis","dial_code":"+1"},{"name":"Sainte-Lucie","dial_code":"+1"},{"name":"Saint-Vincent-et-les-Grenadines","dial_code":"+1"},
+    {"name":"Samoa","dial_code":"+685"},{"name":"Saint-Marin","dial_code":"+378"},{"name":"Sao Tomé-et-Principe","dial_code":"+239"},
+    {"name":"Arabie saoudite","dial_code":"+966"},{"name":"Sénégal","dial_code":"+221"},{"name":"Serbie","dial_code":"+381"},
+    {"name":"Seychelles","dial_code":"+248"},{"name":"Sierra Leone","dial_code":"+232"},{"name":"Singapour","dial_code":"+65"},
+    {"name":"Slovaquie","dial_code":"+421"},{"name":"Slovénie","dial_code":"+386"},{"name":"Îles Salomon","dial_code":"+677"},
+    {"name":"Somalie","dial_code":"+252"},{"name":"Afrique du Sud","dial_code":"+27"},{"name":"Corée du Sud","dial_code":"+82"},
+    {"name":"Espagne","dial_code":"+34"},{"name":"Sri Lanka","dial_code":"+94"},{"name":"Soudan","dial_code":"+249"},
+    {"name":"Soudan du Sud","dial_code":"+211"},{"name":"Suriname","dial_code":"+597"},{"name":"Suède","dial_code":"+46"},
+    {"name":"Suisse","dial_code":"+41"},{"name":"Syrie","dial_code":"+963"},{"name":"Taïwan","dial_code":"+886"},
+    {"name":"Tadjikistan","dial_code":"+992"},{"name":"Tanzanie","dial_code":"+255"},{"name":"Thaïlande","dial_code":"+66"},
+    {"name":"Timor-Leste","dial_code":"+670"},{"name":"Togo","dial_code":"+228"},{"name":"Tonga","dial_code":"+676"},
+    {"name":"Trinité-et-Tobago","dial_code":"+1"},{"name":"Tunisie","dial_code":"+216"},{"name":"Turquie","dial_code":"+90"},
+    {"name":"Turkménistan","dial_code":"+993"},{"name":"Tuvalu","dial_code":"+688"},{"name":"Ouganda","dial_code":"+256"},
+    {"name":"Ukraine","dial_code":"+380"},{"name":"Émirats arabes unis","dial_code":"+971"},{"name":"Royaume-Uni","dial_code":"+44"},
+    {"name":"États-Unis","dial_code":"+1"},{"name":"Uruguay","dial_code":"+598"},{"name":"Ouzbékistan","dial_code":"+998"},
+    {"name":"Vanuatu","dial_code":"+678"},{"name":"Vatican (Saint-Siège)","dial_code":"+39"},{"name":"Venezuela","dial_code":"+58"},
+    {"name":"Viêt Nam","dial_code":"+84"},{"name":"Yémen","dial_code":"+967"},{"name":"Zambie","dial_code":"+260"},
+    {"name":"Zimbabwe","dial_code":"+263"}
+  ];
+
+  // --- DOM refs ---
+  const form = document.getElementById('inscriptionForm');
+  const submitBtn = document.getElementById('submitBtn');
+  const successMessage = document.getElementById('successMessage');
+  const createdMessage = document.getElementById('createdMessage');
+  const errorMessage = document.getElementById('errorMessage');
+  const networkMessage = document.getElementById('networkMessage');
+
+  const inline = {
+    genre: document.getElementById('err_genre'),
+    nom: document.getElementById('err_nom'),
+    prenom: document.getElementById('err_prenom'),
+    rs: document.getElementById('err_rs'),
+    email: document.getElementById('err_email'),
+    password: document.getElementById('err_password'),
+    pays: document.getElementById('err_pays'),
+    tel: document.getElementById('err_tel'),
+    mode: document.getElementById('err_mode'),
+    conf: document.getElementById('err_conf'),
+  };
+
+  const inputs = {
+    genre: document.getElementById('genre'),
+    nom: document.getElementById('nom'),
+    prenom: document.getElementById('prenom'),
+    raison_sociale: document.getElementById('raison_sociale'),
+    email: document.getElementById('email'),
+    mot_de_passe: document.getElementById('mot_de_passe'),
+    confirmer_mot_de_passe: document.getElementById('confirmer_mot_de_passe'),
+    pays: document.getElementById('pays'),
+    indicatif: document.getElementById('indicatif'),
+    telephone: document.getElementById('telephone'),
+    mode: document.getElementById('mode'),
+    confidentialite: document.getElementById('confidentialite')
+  };
+
+  // --- Helpers ---
+  function showInline(id, show){ if(inline[id]) inline[id].style.display = show ? 'block' : 'none'; }
+  function hideAllInline(){ Object.keys(inline).forEach(k=> showInline(k,false)); }
+  function hideAllMessages(){
+    [successMessage, createdMessage, errorMessage, networkMessage].forEach(el=>{
+      el.style.display='none'; el.setAttribute('aria-hidden','true');
+    });
+  }
+  function showMessage(el, text){
+    hideAllMessages();
+    el.textContent = text;
+    el.style.display='block';
+    el.setAttribute('aria-hidden','false');
+  }
+  function sanitize(v){ return String(v||'').trim(); }
+
+  // --- Populate pays select (tri alphabétique) ---
+  (function populateCountries(){
+    const sorted = COUNTRIES.slice().sort((a,b)=>{
+    const an = a.name.toLowerCase(), bn = b.name.toLowerCase();
+     return an < bn ? -1 : (an > bn ? 1 : 0);
+    });    const sel = inputs.pays;
+    sel.innerHTML = '';
+    const placeholder = document.createElement('option'); placeholder.value=''; placeholder.textContent = T[currentLang].select_placeholder || '-- Select --';
+    sel.appendChild(placeholder);
+    sorted.forEach(c=>{
+      const opt = document.createElement('option');
+      opt.value = c.name;
+      opt.dataset.dial = c.dial_code;
+      opt.textContent = c.name + ' ' + (c.dial_code ? `(${c.dial_code})` : '');
+      sel.appendChild(opt);
+    });
+
+    const prefer = sorted.find(s => s.name.toLowerCase().includes(' Sélectionnez '));
+    if(prefer) sel.value = prefer.name;
+    updateIndicatif();
+  })();
+
+  // --- Update indicatif when pays change ---
+  function updateIndicatif(){
+    const sel = inputs.pays;
+    const selected = sel.options[sel.selectedIndex];
+    const dial = selected ? selected.dataset.dial || '' : '';
+    inputs.indicatif.value = dial || '';
+  }
+  inputs.pays.addEventListener('change', ()=> updateIndicatif());
+
+  // --- Language application (update text nodes, placeholders, aria) ---
+  function applyLanguage(lang){
+    currentLang = lang;
+    localStorage.setItem('lang', lang);
+    document.getElementById('title').textContent = T[lang].title || T['FR'].title;
+    document.getElementById('subtitle').textContent = T[lang].subtitle || '';
+    document.getElementById('label_genre').textContent = 'Civilité *';
+    document.getElementById('label_rs').textContent = T[lang].label_rs || '';
+    document.getElementById('label_nom').textContent = T[lang].label_nom || '';
+    document.getElementById('label_prenom').textContent = T[lang].label_prenom || '';
+    document.getElementById('label_email').textContent = T[lang].label_email || '';
+    document.getElementById('label_pass').textContent = T[lang].label_pass || '';
+    document.getElementById('help_pass').textContent = T[lang].help_pass || '';
+    document.getElementById('label_confpass').textContent = T[lang].label_confpass || '';
+    document.getElementById('label_pays').textContent = T[lang].label_pays || '';
+    document.getElementById('label_tel').textContent = T[lang].label_tel || '';
+    document.getElementById('label_mode').textContent = T[lang].label_mode || '';
+    document.getElementById('confidentialite_label').innerHTML = T[lang].label_confidentialite || '';
+    submitBtn.textContent = T[lang].btn || 'Créer mon compte';
+    inputs.email.placeholder = T[lang].placeholder_email || '';
+    inputs.mot_de_passe.placeholder = T[lang].placeholder_pass || '';
+    inputs.telephone.placeholder = T[lang].placeholder_tel || '';
+    const firstOption = inputs.pays.querySelector('option');
+    if(firstOption) firstOption.textContent = T[lang].select_placeholder || firstOption.textContent;
+
+    // traduction des options genre
+    const opts = inputs.genre.options;
+    if(opts.length >= 4){
+      opts[1].textContent = T[lang].opt_mr || opts[1].textContent;
+      opts[2].textContent = T[lang].opt_mrs || opts[2].textContent;
+      opts[3].textContent = T[lang].opt_inst || opts[3].textContent;
+    }
+  }
+
+  // init language
+  langSelect.value = currentLang;
+  applyLanguage(currentLang);
+  langSelect.addEventListener('change', (e)=> applyLanguage(e.target.value));
+
+  // --- CSRF token generation (placeholder) ---
+  (function insertCSRF(){
+    const token = 'csrf_' + Math.random().toString(36).slice(2,12);
+    const container = document.getElementById('csrfContainer');
+    container.innerHTML = `<input type="hidden" name="csrf_token" value="${token}" />`;
+  })();
+
+  // --- Validation helpers ---
+  function isEmail(v){
+    v = sanitize(v);
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+  }
+  function isPhoneDigits(v){
+    v = sanitize(v).replace(/\D/g,'');
+    return /^\d{6,15}$/.test(v);
+  }
+
+  function validateAll(){
+    hideAllInline();
+    let ok = true;
+    if(!sanitize(inputs.genre.value)){
+      showInline('genre', true); ok=false;
+    }
+    if(inputs.genre.value === "Institution" && !sanitize(inputs.raison_sociale.value)){
+      showInline('rs', true); ok=false;
+    }
+    if(!sanitize(inputs.nom.value) || sanitize(inputs.nom.value).length < 2){
+      showInline('nom', true); ok=false;
+    }
+    if(!sanitize(inputs.prenom.value) || sanitize(inputs.prenom.value).length < 2){
+      showInline('prenom', true); ok=false;
+    }
+    if(!isEmail(inputs.email.value)){
+      showInline('email', true); ok=false;
+    }
+    if(sanitize(inputs.mot_de_passe.value).length < 8 || sanitize(inputs.mot_de_passe.value) !== sanitize(inputs.confirmer_mot_de_passe.value)){
+      showInline('password', true); ok=false;
+    }
+    if(!sanitize(inputs.pays.value)){
+      showInline('pays', true); ok=false;
+    }
+    if(!isPhoneDigits(inputs.telephone.value)){
+      showInline('tel', true); ok=false;
+    }
+    if(!sanitize(inputs.mode.value)){
+      showInline('mode', true); ok=false;
+    }
+    if(!inputs.confidentialite.checked){
+      showInline('conf', true); ok=false;
+    }
+    return ok;
+  }
+
+  // toggle submit state
+  function setSubmitting(on){
+    submitBtn.disabled = on;
+    submitBtn.textContent = on ? (T[currentLang].sending || 'Envoi en cours...') : (T[currentLang].btn || 'Créer mon compte');
+  }
+
+  // --- Submit handler (light, real fetch) ---
+  form.addEventListener('submit', async function(e){
+    e.preventDefault();
+    hideAllMessages();
+    if(!validateAll()){
+      showMessage(errorMessage, T[currentLang].fix_fields || 'Corrigez les champs indiqués.');
+      return;
+    }
+    setSubmitting(true);
+
+    const payload = {
+      genre: sanitize(inputs.genre.value),
+      raison_sociale: sanitize(inputs.raison_sociale.value),
+      nom: sanitize(inputs.nom.value),
+      prenom: sanitize(inputs.prenom.value),
+      email: sanitize(inputs.email.value),
+      mot_de_passe: sanitize(inputs.mot_de_passe.value),
+      pays: sanitize(inputs.pays.value),
+      indicatif: sanitize(inputs.indicatif.value),
+      telephone: sanitize(inputs.telephone.value).replace(/\D/g,''),
+      mode: sanitize(inputs.mode.value),
+      accept_confidentialite: inputs.confidentialite.checked,
+      csrf_token: (document.querySelector('#csrfContainer input[name="csrf_token"]') || {}).value || ''
+    };
+
+    try {
+      const resp = await fetch(API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+      const result = await resp.json();
+      if (resp.ok) {
+        showMessage(createdMessage, T[currentLang].created_message || 'Compte créé — vérifiez votre messagerie.');
+        form.reset();
+        updateIndicatif();
+      } else {
+        showMessage(errorMessage, result?.message || (T[currentLang].error || 'Erreur.'));
+      }
+    } catch (err) {
+      console.error("Erreur réseau:", err);
+      showMessage(networkMessage, T[currentLang].network_error || 'Impossible de contacter le serveur.');
+    } finally {
+      setSubmitting(false);
+    }
+  });
+
+  // --- Real-time feedback: password match ---
+  inputs.confirmer_mot_de_passe.addEventListener('input', ()=>{
+    const p = sanitize(inputs.mot_de_passe.value);
+    const c = sanitize(inputs.confirmer_mot_de_passe.value);
+    showInline('password', !(p && c && p === c) && c.length>0);
+  });
+  inputs.mot_de_passe.addEventListener('input', ()=>{
+    const p = sanitize(inputs.mot_de_passe.value);
+    showInline('password', p.length>0 && p.length<8);
+  });
+
+  inputs.telephone.addEventListener('input', (e)=>{
+    // user formatting allowed; validation on submit/blur
+  });
+
+  // accessibility small helper
+  langSelect.addEventListener('change', ()=> {
+    applyLanguage(langSelect.value);
+  });
+
+  // expose some functions optionally (can be removed if not needed)
+  window.FICDES = {
+    T, COUNTRIES, applyLanguage, validateAll, updateIndicatif
+  };
+document.getElementById('inscriptionForm').addEventListener('submit', async (e) => {
+  e.preventDefault(); // empêche le rechargement de la page
+
+  // Désactive le bouton pendant l’envoi
+  const btn = document.getElementById('submitBtn');
+  btn.disabled = true;
+  const originalText = btn.textContent;
+  btn.textContent = "Envoi en cours...";
+
+  // Récupère les données du formulaire
+  const data = Object.fromEntries(new FormData(e.target).entries());
+
+  try {
+    // 🔗 URL du backend (tu la changeras après déploiement sur Netlify)
+    const API_URL = "/.netlify/functions/sendCode";
+
+    // Envoi au serveur
+    const res = await fetch(API_URL, {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(data)
+    });
+
+    const json = await res.json();
+
+    if (res.ok) {
+      alert("✅ Code envoyé ! Vous allez être redirigé vers CPF2.");
+      window.location.href = "index_CPF2.html";
+    } else {
+      alert("❌ Erreur : " + (json.message || "Échec d’envoi du code"));
+    }
+
+  } catch (err) {
+    alert("⚠️ Erreur de connexion au serveur.");
+    console.error(err);
+  } finally {
+    btn.disabled = false;
+    btn.textContent = originalText;
+  }
+});
+  
+  </script>
+</body>
+</html>

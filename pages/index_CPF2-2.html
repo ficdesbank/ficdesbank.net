@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Inscription Entreprise — FICDES BANK</title>
+  <style>
+    :root{
+      --primary-color:#007bff;
+      --hover-color:#0056b3;
+      --input-bg:#f8f9fa;
+      --border-color:#ced4da;
+      --card-bg:#ffffff;
+      --gradient-bg:linear-gradient(90deg,#74ebd5,#acb6e5);
+    }
+    *{box-sizing:border-box;margin:0;padding:0;font-family:"Poppins",sans-serif}
+    body{
+      min-height:100vh;display:flex;align-items:center;justify-content:center;
+      padding:20px;background:var(--gradient-bg);
+    }
+    .container{
+      width:100%;max-width:900px;background:var(--card-bg);border-radius:14px;
+      box-shadow:0 10px 30px rgba(0,0,0,.18);padding:28px;animation:fadeIn .6s ease;
+    }
+    @keyframes fadeIn{from{opacity:0;transform:translateY(-18px)}to{opacity:1;transform:none}}
+    .header{display:flex;align-items:center;gap:16px;margin-bottom:18px}
+    .brand{
+      width:64px;height:64px;border-radius:10px;background:var(--primary-color);
+      display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:18px;
+      box-shadow:0 6px 18px rgba(0,0,0,.12)
+    }
+    .titles h1{font-size:20px;color:#222;margin-bottom:4px}
+    .titles p{color:var(--primary-color);font-weight:600;margin:0}
+    form{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .full{grid-column:1/3}
+    label{display:block;font-weight:600;color:#444;margin-bottom:6px;font-size:14px}
+    input,select,textarea{width:100%;padding:11px;border:1px solid var(--border-color);border-radius:8px;background:var(--input-bg);font-size:14px;transition:box-shadow .18s,border-color .18s}
+    input:focus,select:focus,textarea:focus{outline:none;border-color:var(--primary-color);box-shadow:0 0 6px rgba(0,123,255,.18)}
+    .row{display:flex;gap:10px}
+    .small{width:140px}
+    .phone-container{display:flex;gap:8px}
+    .file-note{font-size:13px;color:#666;margin-top:6px}
+    .files-list{font-size:13px;color:#333;margin-top:8px}
+    .checkbox{display:flex;align-items:center;gap:8px;font-size:14px}
+    .actions{grid-column:1/3;display:flex;gap:12px;align-items:center;justify-content:space-between;margin-top:6px}
+    .left-note{font-size:13px;color:#666}
+    button{background:var(--primary-color);color:#fff;border:none;padding:12px 18px;border-radius:8px;font-size:16px;cursor:pointer;transition:background .18s}
+    button:hover{background:var(--hover-color)}
+    .secondary{background:#f1f5f9;color:#333;border:1px solid #e2e8f0}
+    .success{display:none;background:#e8f5e9;color:#1b5e20;padding:10px;border-radius:8px;font-weight:600;text-align:center;margin-top:12px}
+    .error{color:#b00020;font-size:13px;margin-top:6px}
+    @media (max-width:820px){form{grid-template-columns:1fr} .full{grid-column:1/2}}
+  </style>
+</head>
+<body>
+  <div class="container" role="main" aria-labelledby="title">
+    <div class="header">
+      <div class="brand">FB</div>
+      <div class="titles">
+        <h1 id="title">FICDES BANK — CPF - SECURISE</h1>
+        <p>Formulaire sécurisé</p>
+      </div>
+    </div>
+
+    <form id="ficdesForm" novalidate>
+      <!-- Code d'auth -->
+      <div class="full">
+        <label for="authCode">Code de confirmation d'authentification *</label>
+        <input type="text" id="authCode" name="authCode" placeholder="Entrez le code reçu (ex : 123456)" maxlength="10" required>
+        <div class="error" id="authError"></div>
+      </div>
+
+      <!-- Entreprise -->
+      <div>
+        <label for="nom_entreprise">Nom de l'entreprise *</label>
+        <input id="nom_entreprise" name="nom_entreprise" type="text" placeholder="Nom officiel de l'entreprise" required>
+      </div>
+
+      <div>
+        <label for="annee_creation">Année de création *</label>
+        <input id="annee_creation" name="annee_creation" type="number" min="1800" max="2100" placeholder="ex : 2015" required>
+      </div>
+
+      <div>
+        <label for="responsable">Nom et prénom du responsable *</label>
+        <input id="responsable" name="responsable" type="text" placeholder="Nom complet du responsable" required>
+      </div>
+
+      <div>
+        <label for="immat">Numéro d'immatriculation *</label>
+        <input id="immat" name="immat" type="text" placeholder="Numéro d'immatriculation" required>
+      </div>
+
+      <div class="full">
+        <label for="siege">Localisation et siège social *</label>
+        <input id="siege" name="siege" type="text" placeholder="Adresse complète du siège" required>
+      </div>
+
+      <div>
+        <label for="secteur">Secteur d'activité *</label>
+        <select id="secteur" name="secteur" required>
+          <option value="">-- Sélectionnez --</option>
+          <option>Commerce</option>
+          <option>Services</option>
+          <option>Industrie</option>
+          <option>Agriculture</option>
+          <option>Technologie</option>
+          <option>Autre</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="adresse_service">Adresse de service</label>
+        <input id="adresse_service" name="adresse_service" type="text" placeholder="Adresse postale du service">
+      </div>
+
+      <!-- Documents PDF entreprise -->
+      <div class="full">
+        <label>Documents d'immatriculation (PDF requis) :</label>
+        <div style="display:flex;gap:12px;flex-wrap:wrap">
+          <div style="flex:1;min-width:220px">
+            <label for="carte_immat">Carte d'immatriculation (PDF) *</label>
+            <input id="carte_immat" name="carte_immat" type="file" accept="application/pdf" required>
+            <div class="file-note">PDF, max 8 MB. (ex: carte d'immatriculation de la société)</div>
+            <div class="files-list" id="carteList"></div>
+          </div>
+
+          <div style="flex:1;min-width:220px">
+            <label for="carte_econ">Carte opérateur économique & fiscal (PDF) *</label>
+            <input id="carte_econ" name="carte_econ" type="file" accept="application/pdf" required>
+            <div class="file-note">PDF, max 8 MB.</div>
+            <div class="files-list" id="econList"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Identification du responsable -->
+      <div class="full">
+        <label>Pièce d'identification du responsable (fournir en PDF)</label>
+        <div class="row" style="margin-top:6px">
+          <div style="flex:1">
+            <label for="id_type">Type de pièce *</label>
+            <select id="id_type" name="id_type" required>
+              <option value="">-- Sélectionnez --</option>
+              <option value="carte_nationale">Carte nationale</option>
+              <option value="passeport">Passeport</option>
+            </select>
+          </div>
+          <div style="flex:1">
+            <label for="id_file">Fichier (PDF) *</label>
+            <input id="id_file" name="id_file" type="file" accept="application/pdf" required>
+            <div class="files-list" id="idList"></div>
+            <div class="file-note">PDF, max 8 MB. Une copie de la pièce d'identité.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Informations bancaires -->
+      <div>
+        <label for="compte_precedent">Compte bancaire précédent actif ? *</label>
+        <select id="compte_precedent" name="compte_precedent" required>
+          <option value="">-- Sélectionnez --</option>
+          <option value="oui">Oui</option>
+          <option value="non">Non</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="nom_banque">Nom de la banque</label>
+        <input id="nom_banque" name="nom_banque" type="text" placeholder="Nom de la banque">
+      </div>
+
+      <div>
+        <label for="numero_compte">Numéro de compte bancaire</label>
+        <input id="numero_compte" name="numero_compte" type="text" placeholder="Numéro de compte (chiffres)">
+      </div>
+
+      <div>
+        <label for="code_swift">Code SWIFT</label>
+        <input id="code_swift" name="code_swift" type="text" placeholder="Ex : BNPAFRPPXXX">
+        <div class="error" id="swiftError"></div>
+      </div>
+
+      <div>
+        <label for="code_iban">Code IBAN</label>
+        <input id="code_iban" name="code_iban" type="text" placeholder="Ex : FR76 3000 6000 0112 3456 7890 189">
+        <div class="error" id="ibanError"></div>
+      </div>
+
+      <div>
+        <label for="tel">TEL (service ou contact principal) *</label>
+        <input id="tel" name="tel" type="tel" placeholder="+228 9XX XXX XXX" required>
+      </div>
+
+      <!-- Soumettre -->
+      <div class="actions full">
+        <div class="left-note">Les fichiers restent locaux (maquette). Ne contient aucun traitement serveur.</div>
+        <div style="display:flex;gap:10px">
+          <button type="button" class="secondary" id="resetBtn">Réinitialiser</button>
+          <button type="submit" id="submitBtn">Soumettre la demande</button>
+        </div>
+      </div>
+
+      <!-- messages -->
+      <div class="full">
+        <div class="success" id="success">✅ Demande enregistrée en local (maquette). Préparez l'envoi sécurisé côté serveur.</div>
+        <div class="error" id="formError" style="display:none"></div>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    // --- Utilitaires & références DOM ---
+    const MAX_FILE_SIZE = 8 * 1024 * 1024; // 8 MB
+    const form = document.getElementById('ficdesForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const resetBtn = document.getElementById('resetBtn');
+    const successEl = document.getElementById('success');
+    const formError = document.getElementById('formError');
+
+    const carteInput = document.getElementById('carte_immat');
+    const econInput = document.getElementById('carte_econ');
+    const idInput = document.getElementById('id_file');
+
+    const carteList = document.getElementById('carteList');
+    const econList = document.getElementById('econList');
+    const idList = document.getElementById('idList');
+
+    const authCode = document.getElementById('authCode');
+    const authError = document.getElementById('authError');
+
+    const swiftInput = document.getElementById('code_swift');
+    const ibanInput = document.getElementById('code_iban');
+    const swiftError = document.getElementById('swiftError');
+    const ibanError = document.getElementById('ibanError');
+
+    // Afficher noms et vérifier taille
+    function handleFilePreview(inputEl, listEl) {
+      listEl.textContent = '';
+      if (inputEl.files.length === 0) return;
+      const f = inputEl.files[0];
+      if (f.size > MAX_FILE_SIZE) {
+        listEl.innerHTML = '<span style="color:#b00020">Fichier trop volumineux (>8MB).</span>';
+        return;
+      }
+      listEl.textContent = `${f.name} — ${(f.size/1024/1024).toFixed(2)} MB`;
+    }
+    carteInput.addEventListener('change', () => handleFilePreview(carteInput, carteList));
+    econInput.addEventListener('change', () => handleFilePreview(econInput, econList));
+    idInput.addEventListener('change', () => handleFilePreview(idInput, idList));
+
+    // Validation SWIFT (simple) et IBAN (format basique)
+    function validateSwift(swift) {
+      if (!swift) return true; // non obligatoire
+      const re = /^[A-Z]{6}[A-Z0-9]{2}([A-Z0-9]{3})?$/i;
+      return re.test(swift.replace(/\s+/g,''));
+    }
+    function validateIBAN(iban) {
+      if (!iban) return true; // non obligatoire
+      // Basique : commence par 2 lettres pays + chiffres, longueur min 15 max 34
+      const cleaned = iban.replace(/\s+/g,'').toUpperCase();
+      const re = /^[A-Z]{2}[0-9A-Z]{13,32}$/;
+      return re.test(cleaned);
+    }
+
+    // Auth code simple check (ex: 4-10 chiffres/lettres)
+    function validateAuthCode(code) {
+      return /^[0-9A-Za-z]{4,10}$/.test(code.trim());
+    }
+
+    // Reset handler
+    resetBtn.addEventListener('click', () => {
+      form.reset();
+      carteList.textContent = econList.textContent = idList.textContent = '';
+      successEl.style.display = 'none';
+      formError.style.display = 'none';
+      authError.textContent = ibanError.textContent = swiftError.textContent = '';
+    });
+
+    // Soumission: validation front-end (maquette)
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      formError.style.display = 'none';
+      authError.textContent = ibanError.textContent = swiftError.textContent = '';
+      successEl.style.display = 'none';
+
+      // Vérifications requises
+      if (!validateAuthCode(authCode.value)) {
+        authError.textContent = "Code invalide : entre 4 et 10 caractères alphanumériques.";
+        authCode.focus();
+        return;
+      }
+
+      if (!carteInput.files.length || !econInput.files.length || !idInput.files.length) {
+        formError.style.display = 'block';
+        formError.textContent = "Veuillez joindre tous les fichiers PDF requis (immatriculation, opérateur économique, pièce d'identité).";
+        return;
+      }
+
+      // taille fichiers
+      const filesToCheck = [carteInput.files[0], econInput.files[0], idInput.files[0]];
+      for (const f of filesToCheck) {
+        if (f.size > MAX_FILE_SIZE) {
+          formError.style.display = 'block';
+          formError.textContent = `Le fichier "${f.name}" dépasse la taille maximale autorisée (8 MB).`;
+          return;
+        }
+      }
+
+      // SWIFT / IBAN (si fournis)
+      const swiftVal = swiftInput.value.trim();
+      const ibanVal = ibanInput.value.trim();
+      if (swiftVal && !validateSwift(swiftVal)) {
+        swiftError.textContent = "Format SWIFT invalide.";
+        swiftInput.focus();
+        return;
+      }
+      if (ibanVal && !validateIBAN(ibanVal)) {
+        ibanError.textContent = "Format IBAN invalide.";
+        ibanInput.focus();
+        return;
+      }
+
+      // Si tout OK → afficher message de succès (maquette)
+      successEl.style.display = 'block';
+
+      // NOTE : maquette uniquement → ne fait pas d'envoi réel
+      // Si tu veux exporter localement le contenu pour tests, on peut créer un export JSON/download ici.
+      // Exemple simple : création d'un objet résumé (sans fichiers) et console.log
+      const dataSummary = {
+        authCode: authCode.value,
+        entreprise: document.getElementById('nom_entreprise').value,
+        annee_creation: document.getElementById('annee_creation').value,
+        responsable: document.getElementById('responsable').value,
+        immatriculation: document.getElementById('immat').value,
+        siege: document.getElementById('siege').value,
+        secteur: document.getElementById('secteur').value,
+        tel: document.getElementById('tel').value,
+        nom_banque: document.getElementById('nom_banque').value,
+        numero_compte: document.getElementById('numero_compte').value,
+        swift: swiftVal,
+        iban: ibanVal
+      };
+      console.log("Résumé (maquette) :", dataSummary);
+
+      // Simuler une attente puis réinitialiser (optionnel)
+      setTimeout(() => {
+        // Ici tu pourrais rediriger vers une page d'étape suivante, ou déclencher l'envoi réel
+        // Ex : window.location.href = "payment.html";
+      }, 1000);
+    });
+  </script>
+</body>
+</html>

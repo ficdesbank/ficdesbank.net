@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Inscription Complète - FICDES-BANK</title>
+  <style>
+    :root{
+      --primary-color:#007bff;
+      --hover-color:#0056b3;
+      --input-bg:#f8f9fa;
+      --border-color:#ced4da;
+      --gradient-bg:linear-gradient(to right,#74ebd5,#acb6e5);
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0;font-family:"Poppins",sans-serif}
+
+    body{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:var(--gradient-bg);
+      padding:20px;
+    }
+
+    .container{
+      width:100%;
+      max-width:900px;
+      background:#fff;
+      border-radius:14px;
+      box-shadow:0 10px 30px rgba(0,0,0,0.18);
+      padding:28px;
+      animation:fadeIn .7s ease;
+      overflow:hidden;
+    }
+
+    @keyframes fadeIn{
+      from{opacity:0;transform:translateY(-20px)}
+      to{opacity:1;transform:translateY(0)}
+    }
+
+    .header{
+      text-align:center;
+      margin-bottom:18px;
+    }
+
+    .header h2{color:#333;margin-bottom:6px}
+    .header h3{color:var(--primary-color);margin-bottom:0;font-weight:600}
+
+    form{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
+
+    .full{grid-column:1 / -1}
+    .col{display:flex;flex-direction:column}
+    label{font-weight:600;color:#444;margin-bottom:6px;font-size:14px}
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="tel"],
+    input[type="date"],
+    select,
+    textarea,
+    input[type="file"]{
+      padding:10px 12px;border-radius:8px;border:1px solid var(--border-color);
+      background:var(--input-bg);font-size:14px;transition:box-shadow .25s,border .25s;
+    }
+
+    input:focus, select:focus, textarea:focus{
+      outline:none;border-color:var(--primary-color);
+      box-shadow:0 0 6px rgba(0,123,255,0.18);
+    }
+
+    .phone-row{display:flex;gap:8px}
+    .phone-row input:first-child{width:110px;text-align:center}
+    textarea{min-height:80px;resize:vertical;padding:10px}
+
+    .checkbox-row{display:flex;gap:8px;align-items:center}
+    .checkbox-row input[type="checkbox"]{width:auto}
+
+    .file-info{font-size:13px;color:#666;margin-top:6px}
+
+    .actions{display:flex;gap:12px;align-items:center;justify-content:flex-end}
+    .btn{
+      padding:12px 18px;border-radius:10px;border:0;cursor:pointer;font-weight:600;
+      background:var(--primary-color);color:#fff;transition:background .25s;
+    }
+    .btn.secondary{background:#6c757d}
+    .btn:hover{background:var(--hover-color)}
+
+    .small{font-size:13px;color:#666}
+    .note{font-size:13px;color:#555;margin-top:6px}
+
+    .success{
+      display:none;
+      margin-top:14px;
+      background:#e8f5e9;color:#2e7d32;padding:10px;border-radius:8px;font-weight:600;text-align:center;
+    }
+
+    .grid-section{
+      grid-column:1 / -1;
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:12px;
+      padding:12px;
+      border-radius:8px;
+      border:1px dashed rgba(0,0,0,0.06);
+      background:rgba(0,0,0,0.01);
+    }
+
+    @media (max-width:780px){
+      form{grid-template-columns:1fr}
+      .grid-section{grid-template-columns:1fr}
+      .actions{justify-content:stretch;flex-direction:column-reverse}
+    }
+  </style>
+</head>
+<body>
+  <div class="container" role="main" aria-labelledby="titre">
+    <div class="header">
+      <h2 id="titre">Bienvenue chez FICDES-BANK</h2>
+      <h3>Formulaire complet d'ouverture de compte Formulaire sécurisé</h3>
+      <p class="small">Tous les champs marqués d'un * sont obligatoires.</p>
+    </div>
+
+    <form id="inscriptionForm" novalidate>
+      <!-- Ligne 1 -->
+      <div class="col">
+        <label for="genre">Civilité *</label>
+        <select id="genre" name="genre" required>
+          <option value="">-- Sélectionnez --</option>
+          <option>Monsieur</option>
+          <option>Madame</option>
+        </select>
+      </div>
+
+      <div class="col">
+        <label for="codeAuth">Code de confirmation d'auth (envoyé par le site)</label>
+        <div style="display:flex;gap:8px">
+          <input type="text" id="codeAuth" name="codeAuth" placeholder="------" pattern="\\d{6}" inputmode="numeric" maxlength="6">
+          <button type="button" class="btn secondary" id="sendCodeBtn">Envoyer le code</button>
+        </div>
+        <div class="note small">Cliquez sur "Envoyer le code" pour recevoir un code à 6 chiffres (simulation).</div>
+      </div>
+
+      <!-- Nom / Prénom -->
+      <div class="col">
+        <label for="nom">Nom *</label>
+        <input type="text" id="nom" name="nom" required>
+      </div>
+
+      <div class="col">
+        <label for="prenom">Prénom *</label>
+        <input type="text" id="prenom" name="prenom" required>
+      </div>
+
+      <!-- Date et lieu de naissance -->
+      <div class="col">
+        <label for="date_naissance">Date de naissance *</label>
+        <input type="date" id="date_naissance" name="date_naissance" required>
+      </div>
+
+      <div class="col">
+        <label for="lieu_naissance">Lieu de naissance *</label>
+        <input type="text" id="lieu_naissance" name="lieu_naissance" required placeholder="Ville, Pays">
+      </div>
+
+      <!-- Profession / Domaine activité -->
+      <div class="col">
+        <label for="profession">Profession *</label>
+        <input type="text" id="profession" name="profession" required>
+      </div>
+
+      <div class="col">
+        <label for="domaine">Domaine d'activité *</label>
+        <input type="text" id="domaine" name="domaine" required placeholder="ex: Finance, Santé, IT ...">
+      </div>
+
+      <!-- Entreprise / Employeur -->
+      <div class="col">
+        <label for="nom_entreprise">Nom de l'entreprise</label>
+        <input type="text" id="nom_entreprise" name="nom_entreprise" placeholder="Si applicable">
+      </div>
+
+      <div class="col">
+        <label for="nom_employeur">Nom de l'employeur</label>
+        <input type="text" id="nom_employeur" name="nom_employeur" placeholder="Si applicable">
+      </div>
+
+      <!-- Email / Mot de passe -->
+      <div class="col">
+        <label for="email">Adresse e-mail *</label>
+        <input type="email" id="email" name="email" required placeholder="exemple@domaine.tld">
+      </div>
+
+      <div class="col">
+        <label for="telephone">Téléphone *</label>
+        <div class="phone-row">
+          <input type="text" id="indicatif" name="indicatif" readonly placeholder="+XX">
+          <input type="tel" id="telephone" name="telephone" required placeholder="Numéro de téléphone">
+        </div>
+      </div>
+
+      <!-- Mot de passe -->
+      <div class="col">
+        <label for="mot_de_passe">Mot de passe *</label>
+        <input type="password" id="mot_de_passe" name="mot_de_passe" required minlength="8" placeholder="8 caractères minimum">
+      </div>
+
+      <div class="col">
+        <label for="confirmer_mot_de_passe">Confirmer le mot de passe *</label>
+        <input type="password" id="confirmer_mot_de_passe" name="confirmer_mot_de_passe" required minlength="8">
+      </div>
+
+      <!-- Banque : section dédiée -->
+      <div class="grid-section full" aria-labelledby="bankSecTitle">
+        <div style="grid-column:1 / -1;margin-bottom:6px">
+          <label id="bankSecTitle" style="margin-bottom:8px;font-weight:700;color:#333">Informations bancaires</label>
+        </div>
+
+        <div>
+          <label for="compte_precedent_actif">Compte bancaire précédent actif ?</label>
+          <select id="compte_precedent_actif" name="compte_precedent_actif" required>
+            <option value="">-- Sélectionnez --</option>
+            <option value="oui">Oui</option>
+            <option value="non">Non</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="nom_banque">Nom de la banque</label>
+          <input type="text" id="nom_banque" name="nom_banque" placeholder="Nom de la banque">
+        </div>
+
+        <div>
+          <label for="numero_compte">Numéro de compte bancaire</label>
+          <input type="text" id="numero_compte" name="numero_compte" placeholder="Ex: 0123456789">
+        </div>
+
+        <div>
+          <label for="code_swift">Code SWIFT/BIC</label>
+          <input type="text" id="code_swift" name="code_swift" placeholder="Ex: ABCDXXYY" maxlength="11">
+        </div>
+
+        <div>
+          <label for="code_iban">Code IBAN</label>
+          <input type="text" id="code_iban" name="code_iban" placeholder="Ex: FR76 3000 6000 0112 3456 7890 189" maxlength="34">
+        </div>
+      </div>
+
+      <!-- Adresse de service -->
+      <div class="col full">
+        <label for="adresse_service">Adresse de service *</label>
+        <textarea id="adresse_service" name="adresse_service" required placeholder="Adresse complète (rue, ville, code postal, pays)"></textarea>
+      </div>
+
+      <!-- Pièces d'identification -->
+      <div class="col">
+        <label for="photo_ident_pdf">Photo d'identification (PDF) *</label>
+        <input type="file" id="photo_ident_pdf" name="photo_ident_pdf" accept=".pdf" required>
+        <div class="file-info" id="photoFileInfo">Fichier accepté : PDF, taille max 5 MB.</div>
+      </div>
+
+      <div class="col">
+        <label for="piece_ident_pdf">Pièce d'identification (PDF) *</label>
+        <select id="type_piece" name="type_piece" required>
+          <option value="">-- Sélectionnez le type --</option>
+          <option value="carte_nationale">Carte nationale</option>
+          <option value="passeport">Passeport</option>
+        </select>
+        <input type="file" id="piece_ident_pdf" name="piece_ident_pdf" accept=".pdf" required style="margin-top:8px">
+        <div class="file-info" id="pieceFileInfo">PDF requis (max 5 MB).</div>
+      </div>
+
+      <!-- Mode communication / consent -->
+      <div class="col">
+        <label for="mode">Mode de communication préféré *</label>
+        <select id="mode" name="mode" required>
+          <option value="">-- Sélectionnez --</option>
+          <option value="whatsapp">WhatsApp</option>
+          <option value="sms">SMS</option>
+          <option value="email">E-mail</option>
+        </select>
+      </div>
+
+      <div class="col checkbox-row">
+        <input type="checkbox" id="confidentialite" name="confidentialite" required>
+        <label for="confidentialite">J'accepte la <a href="#" target="_blank">politique de confidentialité</a> *</label>
+      </div>
+
+      <!-- Actions -->
+      <div class="full actions">
+        <button type="button" class="btn secondary" id="resetBtn">Réinitialiser</button>
+        <button type="submit" class="btn" id="submitBtn">Soumettre</button>
+      </div>
+
+      <div class="full">
+        <div class="success" id="successMessage">✅ Données enregistrées (simulation). Vous serez redirigé vers la page suivante...</div>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    // --- Données pays/indicatifs (même liste d'exemple, tu peux étendre) ---
+    const paysIndicatifs = [
+      {pays:"Togo",indicatif:"+228"},
+      {pays:"France",indicatif:"+33"},
+      {pays:"Canada",indicatif:"+1"},
+      {pays:"Sénégal",indicatif:"+221"},
+      {pays:"Maroc",indicatif:"+212"},
+      {pays:"Italie",indicatif:"+39"},
+      {pays:"Espagne",indicatif:"+34"},
+      {pays:"Chine",indicatif:"+86"},
+      {pays:"Afrique du Sud",indicatif:"+27"},
+      {pays:"Brésil",indicatif:"+55"}
+    ];
+
+    // Insère une liste de pays courte dans le select pays si besoin (optionnel)
+    // Ici on remplit l'indicatif uniquement : on peut détecter le pays sinon.
+    const indicatifInput = document.getElementById('indicatif');
+
+    // --- Simuler l'envoi d'un code d'authentification ---
+    const sendCodeBtn = document.getElementById('sendCodeBtn');
+    let lastGeneratedCode = null;
+    sendCodeBtn.addEventListener('click', () => {
+      // Générer un code à 6 chiffres
+      lastGeneratedCode = Math.floor(100000 + Math.random() * 900000).toString();
+      // Simulation : en prod on enverrait par SMS/Email via le backend
+      alert('Code d'authentification (simulation) : ' + lastGeneratedCode + '\n(En production, le code est envoyé par le site au numéro/e-mail fourni.)');
+      // Optionnel : pré-remplir le champ codeAuth pour tests (commenter si non voulu)
+      document.getElementById('codeAuth').value = '';
+    });
+
+    // --- Gestion fichiers PDF (taille max 5 MB) ---
+    const MAX_FILE_BYTES = 5 * 1024 * 1024; // 5 MB
+    const photoInput = document.getElementById('photo_ident_pdf');
+    const pieceInput = document.getElementById('piece_ident_pdf');
+    const photoFileInfo = document.getElementById('photoFileInfo');
+    const pieceFileInfo = document.getElementById('pieceFileInfo');
+
+    function handleFileInputChange(inputEl, infoEl){
+      inputEl.addEventListener('change', () => {
+        const f = inputEl.files[0];
+        if(!f){
+          infoEl.textContent = 'Aucun fichier sélectionné.';
+          return;
+        }
+        if(f.type !== 'application/pdf'){
+          infoEl.textContent = 'Erreur : le fichier doit être un PDF.';
+          inputEl.value = '';
+          return;
+        }
+        if(f.size > MAX_FILE_BYTES){
+          infoEl.textContent = 'Erreur : le fichier dépasse 5 MB.';
+          inputEl.value = '';
+          return;
+        }
+        infoEl.textContent = 'Sélectionné : ' + f.name + ' (' + Math.round(f.size/1024) + ' KB)';
+      });
+    }
+
+    handleFileInputChange(photoInput, photoFileInfo);
+    handleFileInputChange(pieceInput, pieceFileInfo);
+
+    // --- Validation IBAN & SWIFT (validation légère côté client) ---
+    function validateSwift(swift){
+      // SWIFT/BIC : 8 ou 11 chars alphanumériques
+      return /^[A-Za-z0-9]{8}([A-Za-z0-9]{3})?$/.test(swift.trim());
+    }
+    function validateIban(iban){
+      // Vérification basique : retirer espaces, longueur 15-34, commencer par 2 lettres
+      const val = iban.replace(/\s+/g,'');
+      return /^[A-Za-z]{2}[0-9A-Za-z]{13,32}$/.test(val);
+    }
+
+    // --- Form submission handling ---
+    const form = document.getElementById('inscriptionForm');
+    const successMessage = document.getElementById('successMessage');
+    const submitBtn = document.getElementById('submitBtn');
+    const resetBtn = document.getElementById('resetBtn');
+
+    resetBtn.addEventListener('click', () => {
+      if(confirm('Voulez-vous réinitialiser le formulaire ?')){
+        form.reset();
+        photoFileInfo.textContent = 'Fichier accepté : PDF, taille max 5 MB.';
+        pieceFileInfo.textContent = 'PDF requis (max 5 MB).';
+        successMessage.style.display = 'none';
+        indicatifInput.value = '';
+      }
+    });
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      // Verification mots de passe
+      const mdp = document.getElementById('mot_de_passe').value;
+      const mdpConf = document.getElementById('confirmer_mot_de_passe').value;
+      if(mdp !== mdpConf){
+        alert('❌ Les mots de passe ne correspondent pas.');
+        return;
+      }
+
+      // Vérifier SWIFT/IBAN si remplis
+      const swift = document.getElementById('code_swift').value.trim();
+      const iban = document.getElementById('code_iban').value.trim();
+      if(swift && !validateSwift(swift)){
+        alert('❌ Le code SWIFT semble invalide (format attendu : 8 ou 11 caractères alphanumériques).');
+        return;
+      }
+      if(iban && !validateIban(iban)){
+        alert('❌ Le code IBAN semble invalide (vérifiez le format).');
+        return;
+      }
+
+      // Vérification fichiers (déjà en partie faite)
+      if(photoInput.required && (!photoInput.files || !photoInput.files[0])){
+        alert('❌ Veuillez fournir la photo d\'identification en PDF.');
+        return;
+      }
+      if(pieceInput.required && (!pieceInput.files || !pieceInput.files[0])){
+        alert('❌ Veuillez fournir la pièce d\'identification en PDF.');
+        return;
+      }
+
+      // Vérifier code d'auth (si un code a été généré par simulation)
+      const codeEntered = document.getElementById('codeAuth').value.trim();
+      if(lastGeneratedCode && codeEntered !== lastGeneratedCode){
+        alert('❌ Le code d\'authentification est incorrect. (Pour la démo, cliquez sur "Envoyer le code" puis entrez le code affiché.)');
+        return;
+      }
+
+      // Si tout OK : afficher message de succès et simuler envoi/redirect
+      successMessage.style.display = 'block';
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Traitement...';
+
+      // Simuler envoi vers backend (ici on ne poste pas réellement)
+      setTimeout(() => {
+        // En prod : envoyer via fetch() vers API/serveur
+        successMessage.textContent = '✅ Vos informations ont été soumises (simulation). Redirection...';
+        // Redirection simulée vers payment.html
+        setTimeout(() => {
+          // window.location.href = 'payment.html'; // activer si tu veux rediriger
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Soumettre';
+        }, 1200);
+      }, 1000);
+    });
+
+    // --- Optionnel : pré-remplir indicatif selon navigateur/langue (simple heuristique) ---
+    (function guessIndicatif(){
+      try{
+        const lang = navigator.language || navigator.userLanguage || '';
+        if(lang.startsWith('fr')) {
+          // par défaut France
+          indicatifInput.value = '+33';
+        } else if(lang.startsWith('en-CA') || lang==='en-CA'){
+          indicatifInput.value = '+1';
+        } else {
+          // vide par défaut (utilisateur peut sélectionner manuellement)
+          indicatifInput.value = '';
+        }
+      }catch(e){
+        indicatifInput.value = '';
+      }
+    })();
+
+    // --- Fin script ---
+  </script>
+</body>
+</html>
